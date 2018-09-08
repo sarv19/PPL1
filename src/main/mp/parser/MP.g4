@@ -8,15 +8,17 @@ options{
 	language=Python3; //=Java
 	//language=Java;
 }
-
+program: manydeclares;
+manydeclares: varde;
 //          recognizer                   ///
-program  : mptype 'main' LB RB LP body? RP EOF ;
+/*program  : mptype 'main' LB RB LP body? RP EOF ;
 mptype: INTTYPE  VOIDTYPE ;
 body: funcall SEMI;
 exp: funcall  INTLIT ;
-funcall: ID LB exp? RB ;
+funcall: ID LB exp? RB ;*/
 
 ////         small tokens        ////////
+
 LB: '(' ;
 RB: ')' ;
 LP: '{';
@@ -37,7 +39,9 @@ SUBNE: '-';
 DIVSI: '/';
 GRETN: '>';
 GREEQ: '>=';
+SP: ' ';
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
 
 /////////  keywords         /////
 BREAK: B R E A K;
@@ -61,14 +65,17 @@ FALSE: F A L S E;
 ARRAY: A R R A Y;
 OF: O F;
 REAL: R E A L;
-BOOLEAN: B O O L E A N;
-INTEGER: I N T E G E R;
+BOOLEAN: B O O L E A N | B O O L;
+INTEGER: I N T E G E R | I N T;
 STRING: S T R I N G;
 NOT: N O T;
 AND: A N D;
 OR: O R;
 DIV: D I V;
 MOD: M O D;
+/*KEYWORD: 'break'|'continue'|'for'|'to'|'downto'|'do'|'if'|'then'|'else'|'return'|'while'|'begin'|'end'
+|'function'|'procedure'|'var'|'true'|'false'|'array'|'of'|'real'|'boolean'|'integer'|'string
+|'not'|'and'|'or'|'div'|'mod'; */
 ///////    fragments         ////
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -97,15 +104,37 @@ fragment X:('x'|'X');
 fragment Y:('y'|'Y');
 fragment Z:('z'|'Z');
 
+fragment NUM: [0-9];
+ManyNum: NUM+;
+
 //////    bigger tokens      //////
 ID: ('_'|[a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|'_')*;
 INTLIT: [0-9]+;
 REALLIT: ([0-9]+ ('.')? [0-9]*([0-9]+[eE]'-'?[0-9]+)?)
 				| ([0-9]* ('.')? [0-9]+([eE]'-'?[0-9]+)?);
-/*KEYWORD: 'break'|'continue'|'for'|'to'|'downto'|'do'|'if'|'then'|'else'|'return'|'while'|'begin'|'end'
-|'function'|'procedure'|'var'|'true'|'false'|'array'|'of'|'real'|'boolean'|'integer'|'string
-|'not'|'and'|'or'|'div'|'mod'; */
 BOOLLIT: 'true'|'false';
+STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"';
+TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
+primtype: BOOLEAN | INTEGER | REAL | STRING;
+arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP? OF SP+ primtype;
+////////   commnent      //////////
+CMT: BLKCMT | LINECMT;
+BLKCMT: TRACMT | BLCMT;
+TRACMT: '(*'.*?'*)' -> skip;
+BLCMT: '{'.*?'}' -> skip;
+LINECMT: '//'~[\r\n]*;
+
+////////   precedence    /////////
+//prece1: prece2 ((AND|THEN|OR|ELSE)prece2)*;
+//prece2:
+
+////////   declaration       ////////
+varde: VAR SP? (idlist COL SP* vartype SP* SEMI)+;
+vartype: primtype | arrtype;
+idlist: ID (CM ID)*;
+
+//arraydeclare: 'var' ID COL arrlist 'of' TYPE;
+//arrlist:
 
 ERROR_CHAR: .;  //{raise Erroroken(self.text)}
 UNCLOSE_STRING: .;

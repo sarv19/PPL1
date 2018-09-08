@@ -2,22 +2,26 @@ import unittest
 from TestUtils import TestParser
 
 class ParserSuite(unittest.TestCase):
-    def test_simple_program(self):
-        """Simple program: int main() {} """
-        input = """int main() {}"""
-        expect = "successful"
-        self.assertTrue(TestParser.test(input,expect,201))
 
-    def test_more_complex_program(self):
-        """More complex program"""
-        input = """int main () {
-            putIntLn(4);
-        }"""
+#######     test declaration      ##########
+    def test_declare1(self):
+        input = """VAR a,b,c:integer;"""
         expect = "successful"
-        self.assertTrue(TestParser.test(input,expect,202))
-    
-    def test_wrong_miss_close(self):
-        """Miss ) int main( {}"""
-        input = """int main( {}"""
-        expect = "Error on line 1 col 10: {"
-        self.assertTrue(TestParser.test(input,expect,203))
+        self.assertTrue(TestParser.test(input,expect,1101))
+    def test_declare2(self):
+        input = """VAR a: array[1 .. 5] of integer;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,1102))
+    def test_declare3(self):
+        input = """VAR a,b,c,E: array[1 .. 55] of boolean;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,1103))
+    def test_declare4(self):
+        input = """VAR a: array[1 .. 5] of integer;
+                        d:integer;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,1104))
+    def test_declare5(self):
+        input = """VAR a,b,c:int;"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,1105))

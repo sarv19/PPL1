@@ -40,7 +40,7 @@ class LexerSuite(unittest.TestCase):
     def test_real8(self):
         self.assertTrue(TestLexer.test("128e-42","128e-42,<EOF>",208))
     def test_real9(self):
-        self.assertTrue(TestLexer.test("e-12","e,-12,<EOF>",209))
+        self.assertTrue(TestLexer.test("e-12","e,-,12,<EOF>",209))
     def test_real10(self):
         self.assertTrue(TestLexer.test("143e","143,e,<EOF>",210))
     def test_real11(self):
@@ -56,4 +56,18 @@ class LexerSuite(unittest.TestCase):
     def test_boolean1(self):
         self.assertTrue(TestLexer.test("true","true,<EOF>",301))
     def test_boolean2(self):
-        self.assertTrue(TestLexer.test("false","false,<EOF>",301))
+        self.assertTrue(TestLexer.test("false","false,<EOF>",302))
+    def test_boolean3(self):
+        self.assertTrue(TestLexer.test("faLSe","faLSe,<EOF>",303))
+    def test_boolean4(self):
+        self.assertTrue(TestLexer.test("TruE","TruE,<EOF>",304))
+
+#######      test string          ###########
+    def test_string1(self):
+        self.assertTrue(TestLexer.test('"abcd"','"abcd",<EOF>',401))
+    def test_string2(self):
+        self.assertTrue(TestLexer.test('"@#$%^&"','"@#$%^&",<EOF>',402))
+    def test_string3(self):
+        self.assertTrue(TestLexer.test('"ab*&*)_cd12AD"','"ab*&*)_cd12AD",<EOF>',403))
+#    def test_string4(self):
+#        self.assertTrue(TestLexer.test('"ab\\\bcd"','"ab\bcd",<EOF>',404))

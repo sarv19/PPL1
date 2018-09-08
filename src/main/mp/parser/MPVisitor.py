@@ -14,23 +14,33 @@ class MPVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MPParser#mptype.
-    def visitMptype(self, ctx:MPParser.MptypeContext):
+    # Visit a parse tree produced by MPParser#manydeclares.
+    def visitManydeclares(self, ctx:MPParser.ManydeclaresContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MPParser#body.
-    def visitBody(self, ctx:MPParser.BodyContext):
+    # Visit a parse tree produced by MPParser#primtype.
+    def visitPrimtype(self, ctx:MPParser.PrimtypeContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MPParser#exp.
-    def visitExp(self, ctx:MPParser.ExpContext):
+    # Visit a parse tree produced by MPParser#arrtype.
+    def visitArrtype(self, ctx:MPParser.ArrtypeContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MPParser#funcall.
-    def visitFuncall(self, ctx:MPParser.FuncallContext):
+    # Visit a parse tree produced by MPParser#varde.
+    def visitVarde(self, ctx:MPParser.VardeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#vartype.
+    def visitVartype(self, ctx:MPParser.VartypeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#idlist.
+    def visitIdlist(self, ctx:MPParser.IdlistContext):
         return self.visitChildren(ctx)
 
 
