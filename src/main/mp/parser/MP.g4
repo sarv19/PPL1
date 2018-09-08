@@ -69,7 +69,6 @@ AND: A N D;
 OR: O R;
 DIV: D I V;
 MOD: M O D;
-
 ///////    fragments         ////
 fragment A:('a'|'A');
 fragment B:('b'|'B');
