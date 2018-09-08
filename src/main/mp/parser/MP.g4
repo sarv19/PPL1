@@ -17,12 +17,6 @@ exp: funcall  INTLIT ;
 funcall: ID LB exp? RB ;
 
 ////         small tokens        ////////
-INTTYPE: 'int';
-VOIDTYPE: 'void';
-REALTYPE: 'real';
-BOOLEANTYPE: 'boolean';
-STRINGTYPE: 'string';
-ARRAYTYPE: 'array';
 LB: '(' ;
 RB: ')' ;
 LP: '{';
