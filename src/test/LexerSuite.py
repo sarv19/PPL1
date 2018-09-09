@@ -87,3 +87,6 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test('"begin"','"begin",<EOF>',411))
     def test_string12(self):
         self.assertTrue(TestLexer.test('"This sure is a motherf#$%^& string"','"This sure is a motherf#$%^& string",<EOF>',412))
+#######      esspression          ###########
+    def test_ex1(self):
+        self.assertTrue(TestLexer.test('1+1','1+1,<EOF>',601))

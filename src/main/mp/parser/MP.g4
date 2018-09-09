@@ -78,8 +78,8 @@ MOD: M O D;
 /*KEYWORD: 'break'|'continue'|'for'|'to'|'downto'|'do'|'if'|'then'|'else'|'return'|'while'|'begin'|'end'
 |'function'|'procedure'|'var'|'true'|'false'|'array'|'of'|'real'|'boolean'|'integer'|'string
 |'not'|'and'|'or'|'div'|'mod'; */
-
-
+ANDTHEN: AND SP THEN;
+ORELSE: OR SP ELSE;
 ///////    fragments         ////
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -137,9 +137,22 @@ LINECMT: '//'~[\r\n]*;
 
 
 ////////   precedence    /////////
-//prece1: prece2 ((AND|THEN|OR|ELSE)prece2)*;
-//prece2:
-
+expr1: (expr2(ANDTHEN|ORELSE))*expr2;
+expr2: (expr3(EQ|NOTEQ|LESSTN|LESSEQ|GREEQ|GRETN)expr3)+;
+expr3: (expr4(ADD|SUBNE|OR))*expr4;
+expr4: (expr5(DIVSI|MOD|AND))*expr5;
+expr5: (SUBNE|NOT)*expr6;
+expr6: ID|ManyNum;
+/*expr: 	LB expr RB
+			|	<assoc=right> (NOT | SUBNE) expr
+			| expr (DIV|MUL|MOD) expr
+			|	expr (ADD|SUBNE|OR) expr
+			| expr1
+			| expr (ANDTHEN|ORELSE) expr
+			| ID
+			| ManyNum
+			;*/
+//expr1: expr1 (EQ|NOTEQ|LESSEQ|LESSTN|GREEQ|GRETN) expr1;
 ////////   declaration       ////////
 varde: VAR SP+ (idlist SP* COL SP* vartype SP* SEMI)+;
 vartype: primtype | arrtype;
@@ -150,7 +163,7 @@ funcde1: FUNCTION SP+ ID SP* paralist SP* COL SP* vartype SP* SEMI;
 paralist: LB SP* parade SP* RB;
 parade: (idlist SP* COL SP* vartype)*;
 compostate: BEGIN statelist END;
-
+statelist: .;
 procede: procede1 varde compostate;
 procede1: PROCEDURE SP+ ID SP* paralist SP* SEMI;
 
