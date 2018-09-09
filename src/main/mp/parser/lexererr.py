@@ -10,6 +10,3 @@ class UncloseString(Exception):
 class IllegalEscape(Exception):
     def __init__(self,s):
         self.message = "Illegal Escape In String: "+ s
-
-
-

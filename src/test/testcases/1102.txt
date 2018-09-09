@@ -1,1 +1,1 @@
-VAR a: array[1 .. 5] of integer;
+VAR a: array[1 .. 5] of REAL;

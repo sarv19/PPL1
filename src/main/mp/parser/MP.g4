@@ -10,6 +10,7 @@ options{
 }
 program: manydeclares;
 manydeclares: varde;
+
 //          recognizer                   ///
 /*program  : mptype 'main' LB RB LP body? RP EOF ;
 mptype: INTTYPE  VOIDTYPE ;
@@ -40,7 +41,7 @@ DIVSI: '/';
 GRETN: '>';
 GREEQ: '>=';
 SP: ' ';
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
 
 
 /////////  keywords         /////
@@ -76,6 +77,8 @@ MOD: M O D;
 /*KEYWORD: 'break'|'continue'|'for'|'to'|'downto'|'do'|'if'|'then'|'else'|'return'|'while'|'begin'|'end'
 |'function'|'procedure'|'var'|'true'|'false'|'array'|'of'|'real'|'boolean'|'integer'|'string
 |'not'|'and'|'or'|'div'|'mod'; */
+
+
 ///////    fragments         ////
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -107,6 +110,7 @@ fragment Z:('z'|'Z');
 fragment NUM: [0-9];
 ManyNum: NUM+;
 
+
 //////    bigger tokens      //////
 ID: ('_'|[a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|'_')*;
 INTLIT: [0-9]+;
@@ -116,7 +120,9 @@ BOOLLIT: 'true'|'false';
 STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"';
 TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
 primtype: BOOLEAN | INTEGER | REAL | STRING;
-arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP? OF SP+ primtype;
+arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP* OF SP+ primtype;
+
+
 ////////   commnent      //////////
 CMT: BLKCMT | LINECMT;
 BLKCMT: TRACMT | BLCMT;
@@ -124,18 +130,21 @@ TRACMT: '(*'.*?'*)' -> skip;
 BLCMT: '{'.*?'}' -> skip;
 LINECMT: '//'~[\r\n]*;
 
+
 ////////   precedence    /////////
 //prece1: prece2 ((AND|THEN|OR|ELSE)prece2)*;
 //prece2:
 
 ////////   declaration       ////////
-varde: VAR SP? (idlist COL SP* vartype SP* SEMI)+;
+varde: VAR SP+ (idlist SP* COL SP* vartype SP* SEMI)+;
 vartype: primtype | arrtype;
 idlist: ID (CM ID)*;
 
-//arraydeclare: 'var' ID COL arrlist 'of' TYPE;
-//arrlist:
 
-ERROR_CHAR: .;  //{raise Erroroken(self.text)}
-UNCLOSE_STRING: .;
-ILLEGAL_ESCAPE: .;
+
+ERROR_CHAR: .;// {raise Erroroken(self.text)} .;
+UNCLOSE_STRING: {raise UncloseString(self.text)}
+								'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*;
+ILLEGAL_ESCAPE: {raise IllegalEscape(self.text)}
+							'"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'?;
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines

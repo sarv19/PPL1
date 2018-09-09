@@ -8,32 +8,35 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3D")
-        buf.write("R\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
+        buf.write("]\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b")
         buf.write("\t\b\3\2\3\2\3\3\3\3\3\4\3\4\3\5\3\5\5\5\31\n\5\3\5\3")
-        buf.write("\5\3\5\3\5\3\5\3\5\3\5\3\5\5\5#\n\5\3\5\3\5\6\5\'\n\5")
-        buf.write("\r\5\16\5(\3\5\3\5\3\6\3\6\5\6/\n\6\3\6\3\6\3\6\7\6\64")
-        buf.write("\n\6\f\6\16\6\67\13\6\3\6\3\6\7\6;\n\6\f\6\16\6>\13\6")
-        buf.write("\3\6\3\6\6\6B\n\6\r\6\16\6C\3\7\3\7\5\7H\n\7\3\b\3\b\3")
-        buf.write("\b\7\bM\n\b\f\b\16\bP\13\b\3\b\2\2\t\2\4\6\b\n\f\16\2")
-        buf.write("\3\3\2-\60\2S\2\20\3\2\2\2\4\22\3\2\2\2\6\24\3\2\2\2\b")
-        buf.write("\26\3\2\2\2\n,\3\2\2\2\fG\3\2\2\2\16I\3\2\2\2\20\21\5")
-        buf.write("\4\3\2\21\3\3\2\2\2\22\23\5\n\6\2\23\5\3\2\2\2\24\25\t")
-        buf.write("\2\2\2\25\7\3\2\2\2\26\30\7+\2\2\27\31\7\27\2\2\30\27")
-        buf.write("\3\2\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7\7\2\2\33")
-        buf.write("\34\7\66\2\2\34\35\7\27\2\2\35\36\7\r\2\2\36\37\7\27\2")
-        buf.write("\2\37 \7\66\2\2 \"\7\b\2\2!#\7\27\2\2\"!\3\2\2\2\"#\3")
-        buf.write("\2\2\2#$\3\2\2\2$&\7,\2\2%\'\7\27\2\2&%\3\2\2\2\'(\3\2")
-        buf.write("\2\2(&\3\2\2\2()\3\2\2\2)*\3\2\2\2*+\5\6\4\2+\t\3\2\2")
-        buf.write("\2,.\7(\2\2-/\7\27\2\2.-\3\2\2\2./\3\2\2\2/A\3\2\2\2\60")
-        buf.write("\61\5\16\b\2\61\65\7\f\2\2\62\64\7\27\2\2\63\62\3\2\2")
-        buf.write("\2\64\67\3\2\2\2\65\63\3\2\2\2\65\66\3\2\2\2\668\3\2\2")
-        buf.write("\2\67\65\3\2\2\28<\5\f\7\29;\7\27\2\2:9\3\2\2\2;>\3\2")
-        buf.write("\2\2<:\3\2\2\2<=\3\2\2\2=?\3\2\2\2><\3\2\2\2?@\7\t\2\2")
-        buf.write("@B\3\2\2\2A\60\3\2\2\2BC\3\2\2\2CA\3\2\2\2CD\3\2\2\2D")
-        buf.write("\13\3\2\2\2EH\5\6\4\2FH\5\b\5\2GE\3\2\2\2GF\3\2\2\2H\r")
-        buf.write("\3\2\2\2IN\7\67\2\2JK\7\n\2\2KM\7\67\2\2LJ\3\2\2\2MP\3")
-        buf.write("\2\2\2NL\3\2\2\2NO\3\2\2\2O\17\3\2\2\2PN\3\2\2\2\13\30")
-        buf.write("\"(.\65<CGN")
+        buf.write("\5\3\5\3\5\3\5\3\5\3\5\3\5\7\5#\n\5\f\5\16\5&\13\5\3\5")
+        buf.write("\3\5\6\5*\n\5\r\5\16\5+\3\5\3\5\3\6\3\6\6\6\62\n\6\r\6")
+        buf.write("\16\6\63\3\6\3\6\7\68\n\6\f\6\16\6;\13\6\3\6\3\6\7\6?")
+        buf.write("\n\6\f\6\16\6B\13\6\3\6\3\6\7\6F\n\6\f\6\16\6I\13\6\3")
+        buf.write("\6\3\6\6\6M\n\6\r\6\16\6N\3\7\3\7\5\7S\n\7\3\b\3\b\3\b")
+        buf.write("\7\bX\n\b\f\b\16\b[\13\b\3\b\2\2\t\2\4\6\b\n\f\16\2\3")
+        buf.write("\3\2,/\2_\2\20\3\2\2\2\4\22\3\2\2\2\6\24\3\2\2\2\b\26")
+        buf.write("\3\2\2\2\n/\3\2\2\2\fR\3\2\2\2\16T\3\2\2\2\20\21\5\4\3")
+        buf.write("\2\21\3\3\2\2\2\22\23\5\n\6\2\23\5\3\2\2\2\24\25\t\2\2")
+        buf.write("\2\25\7\3\2\2\2\26\30\7*\2\2\27\31\7\27\2\2\30\27\3\2")
+        buf.write("\2\2\30\31\3\2\2\2\31\32\3\2\2\2\32\33\7\7\2\2\33\34\7")
+        buf.write("\65\2\2\34\35\7\27\2\2\35\36\7\r\2\2\36\37\7\27\2\2\37")
+        buf.write(" \7\65\2\2 $\7\b\2\2!#\7\27\2\2\"!\3\2\2\2#&\3\2\2\2$")
+        buf.write("\"\3\2\2\2$%\3\2\2\2%\'\3\2\2\2&$\3\2\2\2\')\7+\2\2(*")
+        buf.write("\7\27\2\2)(\3\2\2\2*+\3\2\2\2+)\3\2\2\2+,\3\2\2\2,-\3")
+        buf.write("\2\2\2-.\5\6\4\2.\t\3\2\2\2/\61\7\'\2\2\60\62\7\27\2\2")
+        buf.write("\61\60\3\2\2\2\62\63\3\2\2\2\63\61\3\2\2\2\63\64\3\2\2")
+        buf.write("\2\64L\3\2\2\2\659\5\16\b\2\668\7\27\2\2\67\66\3\2\2\2")
+        buf.write("8;\3\2\2\29\67\3\2\2\29:\3\2\2\2:<\3\2\2\2;9\3\2\2\2<")
+        buf.write("@\7\f\2\2=?\7\27\2\2>=\3\2\2\2?B\3\2\2\2@>\3\2\2\2@A\3")
+        buf.write("\2\2\2AC\3\2\2\2B@\3\2\2\2CG\5\f\7\2DF\7\27\2\2ED\3\2")
+        buf.write("\2\2FI\3\2\2\2GE\3\2\2\2GH\3\2\2\2HJ\3\2\2\2IG\3\2\2\2")
+        buf.write("JK\7\t\2\2KM\3\2\2\2L\65\3\2\2\2MN\3\2\2\2NL\3\2\2\2N")
+        buf.write("O\3\2\2\2O\13\3\2\2\2PS\5\6\4\2QS\5\b\5\2RP\3\2\2\2RQ")
+        buf.write("\3\2\2\2S\r\3\2\2\2TY\7\66\2\2UV\7\n\2\2VX\7\66\2\2WU")
+        buf.write("\3\2\2\2X[\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\17\3\2\2\2[Y\3")
+        buf.write("\2\2\2\f\30$+\639@GNRY")
         return buf.getvalue()
 
 
@@ -54,14 +57,14 @@ class MPParser ( Parser ):
     symbolicNames = [ "<INVALID>", "LB", "RB", "LP", "RP", "LQ", "RQ", "SEMI", 
                       "CM", "EQ", "COL", "DD", "ADD", "MUL", "NOTEQ", "LESSTN", 
                       "LESSEQ", "SUBNE", "DIVSI", "GRETN", "GREEQ", "SP", 
-                      "WS", "BREAK", "CONTINUE", "FOR", "TO", "DOWNTO", 
-                      "DO", "IF", "THEN", "ELSE", "RETURN", "WHILE", "BEGIN", 
+                      "BREAK", "CONTINUE", "FOR", "TO", "DOWNTO", "DO", 
+                      "IF", "THEN", "ELSE", "RETURN", "WHILE", "BEGIN", 
                       "END", "FUNCTION", "PROCEDURE", "VAR", "TRUE", "FALSE", 
                       "ARRAY", "OF", "REAL", "BOOLEAN", "INTEGER", "STRING", 
                       "NOT", "AND", "OR", "DIV", "MOD", "ManyNum", "ID", 
                       "INTLIT", "REALLIT", "BOOLLIT", "STRINGLIT", "TYPE", 
                       "CMT", "BLKCMT", "TRACMT", "BLCMT", "LINECMT", "ERROR_CHAR", 
-                      "UNCLOSE_STRING", "ILLEGAL_ESCAPE" ]
+                      "UNCLOSE_STRING", "ILLEGAL_ESCAPE", "WS" ]
 
     RULE_program = 0
     RULE_manydeclares = 1
@@ -96,51 +99,51 @@ class MPParser ( Parser ):
     GRETN=19
     GREEQ=20
     SP=21
-    WS=22
-    BREAK=23
-    CONTINUE=24
-    FOR=25
-    TO=26
-    DOWNTO=27
-    DO=28
-    IF=29
-    THEN=30
-    ELSE=31
-    RETURN=32
-    WHILE=33
-    BEGIN=34
-    END=35
-    FUNCTION=36
-    PROCEDURE=37
-    VAR=38
-    TRUE=39
-    FALSE=40
-    ARRAY=41
-    OF=42
-    REAL=43
-    BOOLEAN=44
-    INTEGER=45
-    STRING=46
-    NOT=47
-    AND=48
-    OR=49
-    DIV=50
-    MOD=51
-    ManyNum=52
-    ID=53
-    INTLIT=54
-    REALLIT=55
-    BOOLLIT=56
-    STRINGLIT=57
-    TYPE=58
-    CMT=59
-    BLKCMT=60
-    TRACMT=61
-    BLCMT=62
-    LINECMT=63
-    ERROR_CHAR=64
-    UNCLOSE_STRING=65
-    ILLEGAL_ESCAPE=66
+    BREAK=22
+    CONTINUE=23
+    FOR=24
+    TO=25
+    DOWNTO=26
+    DO=27
+    IF=28
+    THEN=29
+    ELSE=30
+    RETURN=31
+    WHILE=32
+    BEGIN=33
+    END=34
+    FUNCTION=35
+    PROCEDURE=36
+    VAR=37
+    TRUE=38
+    FALSE=39
+    ARRAY=40
+    OF=41
+    REAL=42
+    BOOLEAN=43
+    INTEGER=44
+    STRING=45
+    NOT=46
+    AND=47
+    OR=48
+    DIV=49
+    MOD=50
+    ManyNum=51
+    ID=52
+    INTLIT=53
+    REALLIT=54
+    BOOLLIT=55
+    STRINGLIT=56
+    TYPE=57
+    CMT=58
+    BLKCMT=59
+    TRACMT=60
+    BLCMT=61
+    LINECMT=62
+    ERROR_CHAR=63
+    UNCLOSE_STRING=64
+    ILLEGAL_ESCAPE=65
+    WS=66
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -358,29 +361,31 @@ class MPParser ( Parser ):
             self.match(MPParser.ManyNum)
             self.state = 30
             self.match(MPParser.RQ)
-            self.state = 32
+            self.state = 34
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==MPParser.SP:
+            while _la==MPParser.SP:
                 self.state = 31
                 self.match(MPParser.SP)
+                self.state = 36
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
 
-
-            self.state = 34
+            self.state = 37
             self.match(MPParser.OF)
-            self.state = 36 
+            self.state = 39 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 35
+                self.state = 38
                 self.match(MPParser.SP)
-                self.state = 38 
+                self.state = 41 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==MPParser.SP):
                     break
 
-            self.state = 40
+            self.state = 43
             self.primtype()
         except RecognitionException as re:
             localctx.exception = re
@@ -450,49 +455,63 @@ class MPParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 42
+            self.state = 45
             self.match(MPParser.VAR)
-            self.state = 44
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==MPParser.SP:
-                self.state = 43
-                self.match(MPParser.SP)
-
-
-            self.state = 63 
+            self.state = 47 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
                 self.state = 46
-                self.idlist()
-                self.state = 47
-                self.match(MPParser.COL)
+                self.match(MPParser.SP)
+                self.state = 49 
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if not (_la==MPParser.SP):
+                    break
+
+            self.state = 74 
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            while True:
                 self.state = 51
+                self.idlist()
+                self.state = 55
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==MPParser.SP:
-                    self.state = 48
+                    self.state = 52
                     self.match(MPParser.SP)
-                    self.state = 53
+                    self.state = 57
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                self.state = 54
-                self.vartype()
                 self.state = 58
+                self.match(MPParser.COL)
+                self.state = 62
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while _la==MPParser.SP:
-                    self.state = 55
+                    self.state = 59
                     self.match(MPParser.SP)
-                    self.state = 60
+                    self.state = 64
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                self.state = 61
+                self.state = 65
+                self.vartype()
+                self.state = 69
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while _la==MPParser.SP:
+                    self.state = 66
+                    self.match(MPParser.SP)
+                    self.state = 71
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+                self.state = 72
                 self.match(MPParser.SEMI)
-                self.state = 65 
+                self.state = 76 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==MPParser.ID):
@@ -537,17 +556,17 @@ class MPParser ( Parser ):
         localctx = MPParser.VartypeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_vartype)
         try:
-            self.state = 69
+            self.state = 80
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [MPParser.REAL, MPParser.BOOLEAN, MPParser.INTEGER, MPParser.STRING]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 67
+                self.state = 78
                 self.primtype()
                 pass
             elif token in [MPParser.ARRAY]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 68
+                self.state = 79
                 self.arrtype()
                 pass
             else:
@@ -598,17 +617,17 @@ class MPParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 71
+            self.state = 82
             self.match(MPParser.ID)
-            self.state = 76
+            self.state = 87
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==MPParser.CM:
-                self.state = 72
+                self.state = 83
                 self.match(MPParser.CM)
-                self.state = 73
+                self.state = 84
                 self.match(MPParser.ID)
-                self.state = 78
+                self.state = 89
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 

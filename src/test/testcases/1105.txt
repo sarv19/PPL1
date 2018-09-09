@@ -1,1 +1,1 @@
-VAR a,b,c:int;
+VAR a,b,c: int;

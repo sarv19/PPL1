@@ -69,5 +69,17 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test('"@#$%^&"','"@#$%^&",<EOF>',402))
     def test_string3(self):
         self.assertTrue(TestLexer.test('"ab*&*)_cd12AD"','"ab*&*)_cd12AD",<EOF>',403))
-#    def test_string4(self):
-#        self.assertTrue(TestLexer.test('"ab\\\bcd"','"ab\bcd",<EOF>',404))
+    def test_string4(self):
+        self.assertTrue(TestLexer.test('"ab\\ncd"','"ab\\ncd",<EOF>',404))
+    def test_string5(self):
+        self.assertTrue(TestLexer.test('"ab\\tcd"','"ab\\tcd",<EOF>',405))
+    def test_string6(self):
+        self.assertTrue(TestLexer.test('"ab\\fcd"','"ab\\fcd",<EOF>',406))
+    def test_string7(self):
+        self.assertTrue(TestLexer.test('"ab \\" cd"','"ab \\" cd",<EOF>',407))
+    def test_unclosed(self):
+        self.assertTrue(TestLexer.test('"abh','Unclosed String: ',408))
+    def test_ilegal1(self):
+       self.assertTrue(TestLexer.test('"a\\c"','Illegal Escape In String: ',409))
+    def test_ilegal2(self):
+       self.assertTrue(TestLexer.test('"a\fc','Illegal Escape In String: ',410))

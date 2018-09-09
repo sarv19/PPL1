@@ -9,7 +9,7 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1101))
     def test_declare2(self):
-        input = """VAR a: array[1 .. 5] of integer;"""
+        input = """VAR a: array[1 .. 5] of REAL;"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1102))
     def test_declare3(self):
@@ -17,11 +17,11 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1103))
     def test_declare4(self):
-        input = """VAR a: array[1 .. 5] of integer;
-                        d:integer;"""
+        input = """VAR a: array[1 .. 5] of strIng;
+                        d,g,i:integer;"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1104))
     def test_declare5(self):
-        input = """VAR a,b,c:int;"""
+        input = """VAR a,b,c: int;"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1105))
