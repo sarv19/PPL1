@@ -83,3 +83,7 @@ class LexerSuite(unittest.TestCase):
        self.assertTrue(TestLexer.test('"a\\c"','Illegal Escape In String: ',409))
     def test_ilegal2(self):
        self.assertTrue(TestLexer.test('"a\fc','Illegal Escape In String: ',410))
+    def test_string11(self):
+        self.assertTrue(TestLexer.test('"begin"','"begin",<EOF>',411))
+    def test_string12(self):
+        self.assertTrue(TestLexer.test('"This sure is a motherf#$%^& string"','"This sure is a motherf#$%^& string",<EOF>',412))

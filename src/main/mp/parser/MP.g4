@@ -9,7 +9,7 @@ options{
 	//language=Java;
 }
 program: manydeclares;
-manydeclares: varde;
+manydeclares: varde | funcde | procede;
 
 //          recognizer                   ///
 /*program  : mptype 'main' LB RB LP body? RP EOF ;
@@ -41,6 +41,7 @@ DIVSI: '/';
 GRETN: '>';
 GREEQ: '>=';
 SP: ' ';
+ASSI: ':=';
 
 
 
@@ -118,8 +119,12 @@ REALLIT: ([0-9]+ ('.')? [0-9]*([0-9]+[eE]'-'?[0-9]+)?)
 				| ([0-9]* ('.')? [0-9]+([eE]'-'?[0-9]+)?);
 BOOLLIT: 'true'|'false';
 STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"';
+//fragment QUOTE: '"' -> skip;
+//STRINGLIT:  QUOTE ('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])* QUOTE;
 TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
 primtype: BOOLEAN | INTEGER | REAL | STRING;
+
+////////   array         //////////
 arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP* OF SP+ primtype;
 
 
@@ -140,11 +145,22 @@ varde: VAR SP+ (idlist SP* COL SP* vartype SP* SEMI)+;
 vartype: primtype | arrtype;
 idlist: ID (CM ID)*;
 
+funcde: funcde1 varde compostate;
+funcde1: FUNCTION SP+ ID SP* paralist SP* COL SP* vartype SP* SEMI;
+paralist: LB SP* parade SP* RB;
+parade: (idlist SP* COL SP* vartype)*;
+compostate: BEGIN statelist END;
+
+procede: procede1 varde compostate;
+procede1: PROCEDURE SP+ ID SP* paralist SP* SEMI;
+
+
 
 
 ERROR_CHAR: .;// {raise Erroroken(self.text)} .;
 UNCLOSE_STRING: {raise UncloseString(self.text)}
 								'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*;
 ILLEGAL_ESCAPE: {raise IllegalEscape(self.text)}
-							'"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'?;
+							'"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
+							('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'?;
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
