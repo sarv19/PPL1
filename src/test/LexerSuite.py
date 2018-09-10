@@ -60,7 +60,7 @@ class LexerSuite(unittest.TestCase):
     def test_boolean3(self):
         self.assertTrue(TestLexer.test("faLSe","faLSe,<EOF>",303))
     def test_boolean4(self):
-        self.assertTrue(TestLexer.test("TruE","TruE,<EOF>",304))
+        self.assertTrue(TestLexer.test("FUNCTION","FUNCTION,<EOF>",304))
 
 #######      test string          ###########
     def test_string1(self):
@@ -87,6 +87,4 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test('"begin"','"begin",<EOF>',411))
     def test_string12(self):
         self.assertTrue(TestLexer.test('"This sure is a motherf#$%^& string"','"This sure is a motherf#$%^& string",<EOF>',412))
-#######      esspression          ###########
-    def test_ex1(self):
-        self.assertTrue(TestLexer.test('1+1','1+1,<EOF>',601))
+#######      esspression          ###########\

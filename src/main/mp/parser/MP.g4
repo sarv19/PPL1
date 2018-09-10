@@ -59,7 +59,7 @@ RETURN: R E T U R N;
 WHILE: W H I L E;
 BEGIN: B E G I N;
 END: E N D;
-FUNCTION: F U C N T I O N;
+FUNCTION: F U N C T I O N;
 PROCEDURE: P R O C E D U R E;
 VAR: V A R;
 TRUE: T R U E;
@@ -75,9 +75,9 @@ AND: A N D;
 OR: O R;
 DIV: D I V;
 MOD: M O D;
-/*KEYWORD: 'break'|'continue'|'for'|'to'|'downto'|'do'|'if'|'then'|'else'|'return'|'while'|'begin'|'end'
-|'function'|'procedure'|'var'|'true'|'false'|'array'|'of'|'real'|'boolean'|'integer'|'string
-|'not'|'and'|'or'|'div'|'mod'; */
+/*KEYWORD: BREAK|CONTINUE|FOR|TO|DOWNTO|DO|IF|THEN|ELSE|RETURN|WHILE|BEGIN|END
+|FUNCTION|PROCEDURE|VAR|TRUE|FALSE|ARRAY|OF|REAL|BOOLEAN|INTEGER|STRING
+|NOT|AND|OR|DIV|MOD;*/
 ANDTHEN: AND SP THEN;
 ORELSE: OR SP ELSE;
 ///////    fragments         ////
@@ -142,7 +142,8 @@ expr2: (expr3(EQ|NOTEQ|LESSTN|LESSEQ|GREEQ|GRETN)expr3)+;
 expr3: (expr4(ADD|SUBNE|OR))*expr4;
 expr4: (expr5(DIVSI|MOD|AND))*expr5;
 expr5: (SUBNE|NOT)*expr6;
-expr6: ID|ManyNum;
+expr6: LB expr7 RB;
+expr7: ID|ManyNum;
 /*expr: 	LB expr RB
 			|	<assoc=right> (NOT | SUBNE) expr
 			| expr (DIV|MUL|MOD) expr
@@ -158,22 +159,22 @@ varde: VAR SP+ (idlist SP* COL SP* vartype SP* SEMI)+;
 vartype: primtype | arrtype;
 idlist: ID (CM ID)*;
 
-funcde: funcde1 varde compostate;
+funcde: funcde1 (varde)* compostate;
 funcde1: FUNCTION SP+ ID SP* paralist SP* COL SP* vartype SP* SEMI;
 paralist: LB SP* parade SP* RB;
-parade: (idlist SP* COL SP* vartype)*;
-compostate: BEGIN statelist END;
-statelist: .;
+parade: ((idlist SP* COL SP* vartype) (SEMI SP* idlist SP* COL SP* vartype)*)*;   // WRONG
+compostate: BEGIN SP* statelist? SP* END;
+statelist: ManyNum;
+
 procede: procede1 varde compostate;
 procede1: PROCEDURE SP+ ID SP* paralist SP* SEMI;
 
 
 
-
-ERROR_CHAR: .;// {raise Erroroken(self.text)} .;
 UNCLOSE_STRING: {raise UncloseString(self.text)}
 								'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*;
 ILLEGAL_ESCAPE: {raise IllegalEscape(self.text)}
 							'"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
 							('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'?;
+ERROR_CHAR: .;// {raise Erroroken(self.text)} .;
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines

@@ -25,3 +25,31 @@ class ParserSuite(unittest.TestCase):
         input = """VAR a,b,c: int;"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1105))
+
+
+########    test function declaration     ################
+    def test_funcdeclare1(self):
+        input = """FUNCTION foo(a,b:integer;c:real):real;
+        Begin
+         1234
+          End"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,2101))
+    def test_funcdeclare2(self):
+        input = """FUNCTION foo (a,b: integer; c: real): array [1 .. 2] of real;BEGIn      1234 END"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,2102))
+    def test_funcdeclare3(self):
+        input = """FUNCTION foo (a,b: integer; c: real): array [1 .. 2] of real;
+        var x,y:real;
+                BEGIN
+                1234
+                END"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,2103))
+    def test_funcdeclare4(self):
+        input = """FUNCTION foo(a,b:integer;c:real):real;
+        Begin
+          End"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,2104))

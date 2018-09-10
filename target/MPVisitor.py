@@ -59,6 +59,11 @@ class MPVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MPParser#expr7.
+    def visitExpr7(self, ctx:MPParser.Expr7Context):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MPParser#varde.
     def visitVarde(self, ctx:MPParser.VardeContext):
         return self.visitChildren(ctx)
