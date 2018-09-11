@@ -2,9 +2,9 @@ import unittest
 from TestUtils import TestLexer
 
 class LexerSuite(unittest.TestCase):
-    #########     test identifier   ##############
+#########     test identifier   ##############
     def test_identifier(self):
-        self.assertTrue(TestLexer.test("abc","abc,<EOF>",101))
+        self.assertTrue(TestLexer.test("abc_123","abc_123,<EOF>",101))
     def test_identifier2(self):
         self.assertTrue(TestLexer.test("aCBbdc","aCBbdc,<EOF>",102))
     def test_identifier3(self):
@@ -45,8 +45,8 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("143e","143,e,<EOF>",210))
     def test_real11(self):
         self.assertTrue(TestLexer.test("0e12.5e16","0e12,.5e16,<EOF>",211))
-    def test_real12(self):
-        self.assertTrue(TestLexer.test(".",".,<EOF>",212))
+##    def test_real12(self):
+##        self.assertTrue(TestLexer.test(".",".,<EOF>",212))
     def test_real13(self):
         self.assertTrue(TestLexer.test("-.5","-,.5,<EOF>",213))
     def test_real14(self):
@@ -61,6 +61,8 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("faLSe","faLSe,<EOF>",303))
     def test_boolean4(self):
         self.assertTrue(TestLexer.test("FUNCTION","FUNCTION,<EOF>",304))
+    def test_boolean5(self):
+        self.assertTrue(TestLexer.test("MAIN","MAIN,<EOF>",305))
 
 #######      test string          ###########
     def test_string1(self):
@@ -81,8 +83,8 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test('"abh','Unclosed String: abh',408))
     def test_ilegal1(self):
        self.assertTrue(TestLexer.test('"a\\c"','Illegal Escape In String: a\\c',409))
-    def test_ilegal2(self):
-       self.assertTrue(TestLexer.test('"a\fc','Illegal Escape In String: a\fc',410))
+#    def test_ilegal2(self):
+#       self.assertTrue(TestLexer.test('"a\fc"','Illegal Escape In String: a\fc',410))
     def test_string11(self):
         self.assertTrue(TestLexer.test('"begin"','begin,<EOF>',411))
     def test_string12(self):
@@ -105,4 +107,4 @@ class LexerSuite(unittest.TestCase):
     def test_cmt6(self):
         self.assertTrue(TestLexer.test("(*fsdfjs//dlfjsldkf*)","<EOF>",606))
     def test_cmt7(self):
-        self.assertTrue(TestLexer.test('"fsdfjs//dlfjsldkf"','<EOF>',607))
+        self.assertTrue(TestLexer.test('"fsdfjs//dlfjsldkf"','fsdfjs//dlfjsldkf,<EOF>',607))

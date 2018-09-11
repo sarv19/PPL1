@@ -40,7 +40,7 @@ SUBNE: '-';
 DIVSI: '/';
 GRETN: '>';
 GREEQ: '>=';
-SP: ' ';
+
 ASSI: ':=';
 
 
@@ -75,6 +75,7 @@ AND: A N D;
 OR: O R;
 DIV: D I V;
 MOD: M O D;
+MAIN: M A I N;
 /*KEYWORD: BREAK|CONTINUE|FOR|TO|DOWNTO|DO|IF|THEN|ELSE|RETURN|WHILE|BEGIN|END
 |FUNCTION|PROCEDURE|VAR|TRUE|FALSE|ARRAY|OF|REAL|BOOLEAN|INTEGER|STRING
 |NOT|AND|OR|DIV|MOD;*/
@@ -111,11 +112,12 @@ fragment Z:('z'|'Z');
 fragment NUM: [0-9];
 ManyNum: NUM+;
 
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
 //////    bigger tokens      //////
 ID: ('_'|[a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|'_')*;
 INTLIT: [0-9]+;
-REALLIT: ([0-9]+ ('.')? [0-9]*([0-9]+[eE]'-'?[0-9]+)?)
+REALLIT: ([0-9]+ ('.')? [0-9]*([0-9]*[eE]'-'?[0-9]+)?)
 				| ([0-9]* ('.')? [0-9]+([eE]'-'?[0-9]+)?);
 BOOLLIT: 'true'|'false';
 STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'{self.text = self.text[1:len(self.text) - 1]};
@@ -123,7 +125,7 @@ STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'{self.text = self.text[1:le
 //STRINGLIT:  QUOTE ('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])* QUOTE;
 TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
 primtype: BOOLEAN | INTEGER | REAL | STRING;
-
+SP: ' ';
 ////////   array         //////////
 arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP* OF SP+ primtype;
 
@@ -144,6 +146,7 @@ expr4: (expr5(DIVSI|MOD|AND))*expr5;
 expr5: (SUBNE|NOT)*expr6;
 expr6: LB expr7 RB;
 expr7: ID | ManyNum;*/
+
 expr: 	    LB expr RB
 			|	<assoc=right> (NOT | SUBNE) expr
 			| expr SP* (DIVSI|MUL|(SP+MOD SP+)) SP* expr
@@ -169,17 +172,26 @@ statelist: ManyNum;
 procede: procede1 varde? compostate;
 procede1: PROCEDURE SP+ ID SP* paralist SP* SEMI;
 
+//int_expr : INTLIT (ADD|SUBNE|DIVSI|MUL) INTLIT {INTLIT };
+//real_expr : REALLIT (ADD|SUBNE|DIVSI|MUL) REALLIT
+//					| REALLIT (ADD|SUBNE|DIVSI|MUL) INTLIT
+//					| INTLIT (ADD|SUBNE|DIVSI|MUL) REALLIT {REALLIT};
 
+UNCLOSE_STRING: '"' ('\\' ([tbfrn] | '\'' | '"' | '\\' )
+    | ~('\b' | '\f' | '\r' | '\n' | '\t' | '\'' | '"' | '\\'))*
+    {raise UncloseString(self.text[1:])}
+    ;
+ILLEGAL_ESCAPE: '"' (~[\\"'\n\t\r\f] | '\\' [ntfrb\\'"])* '\\' ~[ntrbf'"\\]
+                    {raise IllegalEscape(self.text[1:])} ;
 
-UNCLOSE_STRING:'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*
+/*'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*
 								{
 									raise UncloseString(self.text[1:len(self.text)])}
-								;
-ILLEGAL_ESCAPE1: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
+								;*/
+/*ILLEGAL_ESCAPE1: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
 							.*?'"'
 							{raise IllegalEscape(self.text[1:len(self.text) - 1])};
 ILLEGAL_ESCAPE2: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
 							(~'"')*
-							{raise IllegalEscape(self.text[1:len(self.text)])};
-ERROR_CHAR: .;// {raise Erroroken(self.text)} .;
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+							{raise IllegalEscape(self.text[1:len(self.text)])};*/
+ERROR_CHAR: . {raise ErrorToken(self.text)};// {raise Erroroken(self.text)} .;
