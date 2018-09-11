@@ -29,38 +29,8 @@ class MPVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MPParser#expr1.
-    def visitExpr1(self, ctx:MPParser.Expr1Context):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expr2.
-    def visitExpr2(self, ctx:MPParser.Expr2Context):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expr3.
-    def visitExpr3(self, ctx:MPParser.Expr3Context):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expr4.
-    def visitExpr4(self, ctx:MPParser.Expr4Context):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expr5.
-    def visitExpr5(self, ctx:MPParser.Expr5Context):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expr6.
-    def visitExpr6(self, ctx:MPParser.Expr6Context):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expr7.
-    def visitExpr7(self, ctx:MPParser.Expr7Context):
+    # Visit a parse tree produced by MPParser#expr.
+    def visitExpr(self, ctx:MPParser.ExprContext):
         return self.visitChildren(ctx)
 
 

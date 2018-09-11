@@ -53,3 +53,26 @@ class ParserSuite(unittest.TestCase):
           End"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,2104))
+
+
+#########  test procedure declaration     #################
+    def test_procedeclare1(self):
+        input = """procedure foo(a,b:integer;c:real);
+        Begin
+          End"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,3101))
+    def test_procedeclare2(self):
+        input = """procedure foo(a,b:integer;c:real);
+        var x,y: real;
+        Begin
+          End"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,3102))
+    def test_procedeclare3(self):
+        input = """procedure foo(a,b:integer c:real);
+        var x,y: real;
+        Begin
+          End"""
+        expect = "Error on line 1 col 26: c"
+        self.assertTrue(TestParser.test(input,expect,3103))

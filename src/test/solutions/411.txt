@@ -1,1 +1,1 @@
-"begin",<EOF>
+begin,<EOF>

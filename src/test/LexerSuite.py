@@ -64,27 +64,45 @@ class LexerSuite(unittest.TestCase):
 
 #######      test string          ###########
     def test_string1(self):
-        self.assertTrue(TestLexer.test('"abcd"','"abcd",<EOF>',401))
+        self.assertTrue(TestLexer.test('"abcd"','abcd,<EOF>',401))
     def test_string2(self):
-        self.assertTrue(TestLexer.test('"@#$%^&"','"@#$%^&",<EOF>',402))
+        self.assertTrue(TestLexer.test('"@#$%^&"','@#$%^&,<EOF>',402))
     def test_string3(self):
-        self.assertTrue(TestLexer.test('"ab*&*)_cd12AD"','"ab*&*)_cd12AD",<EOF>',403))
+        self.assertTrue(TestLexer.test('"ab*&*)_cd12AD"','ab*&*)_cd12AD,<EOF>',403))
     def test_string4(self):
-        self.assertTrue(TestLexer.test('"ab\\ncd"','"ab\\ncd",<EOF>',404))
+        self.assertTrue(TestLexer.test('"ab\\ncd"','ab\\ncd,<EOF>',404))
     def test_string5(self):
-        self.assertTrue(TestLexer.test('"ab\\tcd"','"ab\\tcd",<EOF>',405))
+        self.assertTrue(TestLexer.test('"ab\\tcd"','ab\\tcd,<EOF>',405))
     def test_string6(self):
-        self.assertTrue(TestLexer.test('"ab\\fcd"','"ab\\fcd",<EOF>',406))
+        self.assertTrue(TestLexer.test('"ab\\fcd"','ab\\fcd,<EOF>',406))
     def test_string7(self):
-        self.assertTrue(TestLexer.test('"ab \\" cd"','"ab \\" cd",<EOF>',407))
+        self.assertTrue(TestLexer.test('"ab \\" cd"','ab \\" cd,<EOF>',407))
     def test_unclosed(self):
-        self.assertTrue(TestLexer.test('"abh','Unclosed String: ',408))
+        self.assertTrue(TestLexer.test('"abh','Unclosed String: abh',408))
     def test_ilegal1(self):
-       self.assertTrue(TestLexer.test('"a\\c"','Illegal Escape In String: ',409))
+       self.assertTrue(TestLexer.test('"a\\c"','Illegal Escape In String: a\\c',409))
     def test_ilegal2(self):
-       self.assertTrue(TestLexer.test('"a\fc','Illegal Escape In String: ',410))
+       self.assertTrue(TestLexer.test('"a\fc','Illegal Escape In String: a\fc',410))
     def test_string11(self):
-        self.assertTrue(TestLexer.test('"begin"','"begin",<EOF>',411))
+        self.assertTrue(TestLexer.test('"begin"','begin,<EOF>',411))
     def test_string12(self):
-        self.assertTrue(TestLexer.test('"This sure is a motherf#$%^& string"','"This sure is a motherf#$%^& string",<EOF>',412))
-#######      esspression          ###########\
+        self.assertTrue(TestLexer.test('"This sure is a motherf#$%^& string"','This sure is a motherf#$%^& string,<EOF>',412))
+
+
+#######      expression          ###########
+
+#######      test commnent       ############
+    def test_cmt1(self):
+        self.assertTrue(TestLexer.test("{fsdfjsdlfjsldkf}","<EOF>",601))
+    def test_cmt2(self):
+        self.assertTrue(TestLexer.test("(*fsdfjsd\\nfjsldkf*)","<EOF>",602))
+    def test_cmt3(self):
+        self.assertTrue(TestLexer.test("//gfvhmekfjirdgdkmflsfokdigjdkmslofij","<EOF>",603))
+    def test_cmt4(self):
+        self.assertTrue(TestLexer.test("//fsdfjsd{lfjsld}kf","<EOF>",604))
+    def test_cmt5(self):
+        self.assertTrue(TestLexer.test("//fsdfjsd(*lfjsld*)kf","<EOF>",605))
+    def test_cmt6(self):
+        self.assertTrue(TestLexer.test("(*fsdfjs//dlfjsldkf*)","<EOF>",606))
+    def test_cmt7(self):
+        self.assertTrue(TestLexer.test('"fsdfjs//dlfjsldkf"','<EOF>',607))

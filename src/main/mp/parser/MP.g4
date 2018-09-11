@@ -118,7 +118,7 @@ INTLIT: [0-9]+;
 REALLIT: ([0-9]+ ('.')? [0-9]*([0-9]+[eE]'-'?[0-9]+)?)
 				| ([0-9]* ('.')? [0-9]+([eE]'-'?[0-9]+)?);
 BOOLLIT: 'true'|'false';
-STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"';
+STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'{self.text = self.text[1:len(self.text) - 1]};
 //fragment QUOTE: '"' -> skip;
 //STRINGLIT:  QUOTE ('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])* QUOTE;
 TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
@@ -129,52 +129,57 @@ arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP* OF SP+ primtype;
 
 
 ////////   commnent      //////////
-CMT: BLKCMT | LINECMT;
+CMT: (BLKCMT | LINECMT) ->skip;
 BLKCMT: TRACMT | BLCMT;
-TRACMT: '(*'.*?'*)' -> skip;
-BLCMT: '{'.*?'}' -> skip;
-LINECMT: '//'~[\r\n]*;
+TRACMT: '(*'.*?'*)' ;
+BLCMT: '{'.*?'}'  ;
+LINECMT: '//'~[\r\n]* ;
 
 
 ////////   precedence    /////////
-expr1: (expr2(ANDTHEN|ORELSE))*expr2;
+/*expr1: (expr2(ANDTHEN|ORELSE))*expr2;
 expr2: (expr3(EQ|NOTEQ|LESSTN|LESSEQ|GREEQ|GRETN)expr3)+;
 expr3: (expr4(ADD|SUBNE|OR))*expr4;
 expr4: (expr5(DIVSI|MOD|AND))*expr5;
 expr5: (SUBNE|NOT)*expr6;
 expr6: LB expr7 RB;
-expr7: ID|ManyNum;
-/*expr: 	LB expr RB
+expr7: ID | ManyNum;*/
+expr: 	    LB expr RB
 			|	<assoc=right> (NOT | SUBNE) expr
-			| expr (DIV|MUL|MOD) expr
-			|	expr (ADD|SUBNE|OR) expr
-			| expr1
-			| expr (ANDTHEN|ORELSE) expr
+			| expr SP* (DIVSI|MUL|(SP+MOD SP+)) SP* expr
+			|	expr SP* (ADD|SUBNE|(SP+ OR SP+)) SP* expr
+			| expr SP* (EQ|NOTEQ|LESSTN|LESSEQ|GREEQ|GRETN) SP* expr
+			| expr  (SP+ ANDTHEN|ORELSE SP+) expr
 			| ID
 			| ManyNum
-			;*/
+			;
 //expr1: expr1 (EQ|NOTEQ|LESSEQ|LESSTN|GREEQ|GRETN) expr1;
 ////////   declaration       ////////
 varde: VAR SP+ (idlist SP* COL SP* vartype SP* SEMI)+;
 vartype: primtype | arrtype;
 idlist: ID (CM ID)*;
 
-funcde: funcde1 (varde)* compostate;
+funcde: funcde1 varde? compostate;
 funcde1: FUNCTION SP+ ID SP* paralist SP* COL SP* vartype SP* SEMI;
 paralist: LB SP* parade SP* RB;
 parade: ((idlist SP* COL SP* vartype) (SEMI SP* idlist SP* COL SP* vartype)*)*;   // WRONG
 compostate: BEGIN SP* statelist? SP* END;
 statelist: ManyNum;
 
-procede: procede1 varde compostate;
+procede: procede1 varde? compostate;
 procede1: PROCEDURE SP+ ID SP* paralist SP* SEMI;
 
 
 
-UNCLOSE_STRING: {raise UncloseString(self.text)}
-								'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*;
-ILLEGAL_ESCAPE: {raise IllegalEscape(self.text)}
-							'"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
-							('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'?;
+UNCLOSE_STRING:'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*
+								{
+									raise UncloseString(self.text[1:len(self.text)])}
+								;
+ILLEGAL_ESCAPE1: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
+							.*?'"'
+							{raise IllegalEscape(self.text[1:len(self.text) - 1])};
+ILLEGAL_ESCAPE2: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
+							(~'"')*
+							{raise IllegalEscape(self.text[1:len(self.text)])};
 ERROR_CHAR: .;// {raise Erroroken(self.text)} .;
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
