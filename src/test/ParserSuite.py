@@ -18,14 +18,13 @@ class ParserSuite(unittest.TestCase):
         self.assertTrue(TestParser.test(input,expect,1103))
     def test_declare4(self):
         input = """VAR a: array[1 .. 5] of strIng;
-                        d,g,i:integer;"""
+                       d,g,i:integer;"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1104))
     def test_declare5(self):
         input = """VAR a,b,c: int;"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,1105))
-
 
 ########    test function declaration     ################
     def test_funcdeclare1(self):
@@ -76,3 +75,10 @@ class ParserSuite(unittest.TestCase):
           End"""
         expect = "Error on line 1 col 26: c"
         self.assertTrue(TestParser.test(input,expect,3103))
+    def test_procedeclare4(self):
+        input = """procedure foo(a,b:integer; c:real;d,e,f:boolean;k:int);
+        var x,y: real;
+        Begin
+          End"""
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,3104))

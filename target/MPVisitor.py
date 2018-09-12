@@ -29,8 +29,33 @@ class MPVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by MPParser#expr.
-    def visitExpr(self, ctx:MPParser.ExprContext):
+    # Visit a parse tree produced by MPParser#exp1.
+    def visitExp1(self, ctx:MPParser.Exp1Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#exp2.
+    def visitExp2(self, ctx:MPParser.Exp2Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#exp3.
+    def visitExp3(self, ctx:MPParser.Exp3Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#exp4.
+    def visitExp4(self, ctx:MPParser.Exp4Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#exp5.
+    def visitExp5(self, ctx:MPParser.Exp5Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#exp6.
+    def visitExp6(self, ctx:MPParser.Exp6Context):
         return self.visitChildren(ctx)
 
 
@@ -86,6 +111,101 @@ class MPVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by MPParser#procede1.
     def visitProcede1(self, ctx:MPParser.Procede1Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expression.
+    def visitExpression(self, ctx:MPParser.ExpressionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#indexexpre.
+    def visitIndexexpre(self, ctx:MPParser.IndexexpreContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expindex.
+    def visitExpindex(self, ctx:MPParser.ExpindexContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expi.
+    def visitExpi(self, ctx:MPParser.ExpiContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expi1.
+    def visitExpi1(self, ctx:MPParser.Expi1Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expi2.
+    def visitExpi2(self, ctx:MPParser.Expi2Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expi3.
+    def visitExpi3(self, ctx:MPParser.Expi3Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#expi4.
+    def visitExpi4(self, ctx:MPParser.Expi4Context):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#invoexpre.
+    def visitInvoexpre(self, ctx:MPParser.InvoexpreContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#exprlist.
+    def visitExprlist(self, ctx:MPParser.ExprlistContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#manystatements.
+    def visitManystatements(self, ctx:MPParser.ManystatementsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#statement.
+    def visitStatement(self, ctx:MPParser.StatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#semistatement.
+    def visitSemistatement(self, ctx:MPParser.SemistatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#nomistatement.
+    def visitNomistatement(self, ctx:MPParser.NomistatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#assignstate.
+    def visitAssignstate(self, ctx:MPParser.AssignstateContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#rhs.
+    def visitRhs(self, ctx:MPParser.RhsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#ifstate.
+    def visitIfstate(self, ctx:MPParser.IfstateContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#whilestate.
+    def visitWhilestate(self, ctx:MPParser.WhilestateContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#forstate.
+    def visitForstate(self, ctx:MPParser.ForstateContext):
         return self.visitChildren(ctx)
 
 

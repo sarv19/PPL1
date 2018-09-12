@@ -8,7 +8,7 @@ options{
 	language=Python3; //=Java
 	//language=Java;
 }
-program: manydeclares;
+program: manydeclares+ EOF;
 manydeclares: varde | funcde | procede;
 
 //          recognizer                   ///
@@ -42,7 +42,7 @@ GRETN: '>';
 GREEQ: '>=';
 
 ASSI: ':=';
-
+//DDD: SP DD SP;
 
 
 /////////  keywords         /////
@@ -79,8 +79,6 @@ MAIN: M A I N;
 /*KEYWORD: BREAK|CONTINUE|FOR|TO|DOWNTO|DO|IF|THEN|ELSE|RETURN|WHILE|BEGIN|END
 |FUNCTION|PROCEDURE|VAR|TRUE|FALSE|ARRAY|OF|REAL|BOOLEAN|INTEGER|STRING
 |NOT|AND|OR|DIV|MOD;*/
-ANDTHEN: AND SP THEN;
-ORELSE: OR SP ELSE;
 ///////    fragments         ////
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -110,9 +108,9 @@ fragment Y:('y'|'Y');
 fragment Z:('z'|'Z');
 
 fragment NUM: [0-9];
-ManyNum: NUM+;
 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
 
 //////    bigger tokens      //////
 ID: ('_'|[a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|'_')*;
@@ -125,9 +123,8 @@ STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'{self.text = self.text[1:le
 //STRINGLIT:  QUOTE ('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])* QUOTE;
 TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
 primtype: BOOLEAN | INTEGER | REAL | STRING;
-SP: ' ';
 ////////   array         //////////
-arrtype: ARRAY SP? LQ ManyNum SP DD SP ManyNum RQ SP* OF SP+ primtype;
+arrtype: ARRAY LQ INTLIT DD INTLIT RQ OF primtype;
 
 
 ////////   commnent      //////////
@@ -139,43 +136,78 @@ LINECMT: '//'~[\r\n]* ;
 
 
 ////////   precedence    /////////
-/*expr1: (expr2(ANDTHEN|ORELSE))*expr2;
-expr2: (expr3(EQ|NOTEQ|LESSTN|LESSEQ|GREEQ|GRETN)expr3)+;
-expr3: (expr4(ADD|SUBNE|OR))*expr4;
-expr4: (expr5(DIVSI|MOD|AND))*expr5;
-expr5: (SUBNE|NOT)*expr6;
-expr6: LB expr7 RB;
-expr7: ID | ManyNum;*/
+exp1: exp1 (AND THEN) exp2 | exp1 (OR ELSE) exp2
+      | exp2;
+exp2: exp3 EQ exp3 | exp3 NOTEQ exp3 |
+       exp3 LESSTN exp3 | exp3 GRETN exp3 |
+       exp3 GREEQ exp3 | exp3;
+exp3: exp3 ADD exp4 | exp3 SUBNE exp4
+       | exp3 OR exp4 | exp4;
+exp4: exp4 DIVSI exp5 | exp4 MUL exp5
+       | exp4 MOD exp5 | exp4 AND exp5
+			 | exp4 DIV exp5 | exp5;
+exp5: NOT exp5| SUBNE exp5
+       | exp6;
+exp6:  LB exp1 RB
+       | ID
+       | INTLIT
+       | BOOLLIT
+       | REALLIT
+       | STRINGLIT;
 
-expr: 	    LB expr RB
-			|	<assoc=right> (NOT | SUBNE) expr
-			| expr SP* (DIVSI|MUL|(SP+MOD SP+)) SP* expr
-			|	expr SP* (ADD|SUBNE|(SP+ OR SP+)) SP* expr
-			| expr SP* (EQ|NOTEQ|LESSTN|LESSEQ|GREEQ|GRETN) SP* expr
-			| expr  (SP+ ANDTHEN|ORELSE SP+) expr
-			| ID
-			| ManyNum
-			;
-//expr1: expr1 (EQ|NOTEQ|LESSEQ|LESSTN|GREEQ|GRETN) expr1;
+
 ////////   declaration       ////////
-varde: VAR SP+ (idlist SP* COL SP* vartype SP* SEMI)+;
+varde: VAR (idlist COL vartype SEMI)+;
 vartype: primtype | arrtype;
 idlist: ID (CM ID)*;
 
 funcde: funcde1 varde? compostate;
-funcde1: FUNCTION SP+ ID SP* paralist SP* COL SP* vartype SP* SEMI;
-paralist: LB SP* parade SP* RB;
-parade: ((idlist SP* COL SP* vartype) (SEMI SP* idlist SP* COL SP* vartype)*)*;   // WRONG
-compostate: BEGIN SP* statelist? SP* END;
-statelist: ManyNum;
+funcde1: FUNCTION ID paralist COL vartype SEMI;
+paralist: LB parade? RB;
+parade: idlist COL vartype (SEMI idlist COL vartype )*;   // WRONG
+compostate: BEGIN statelist? END;
+statelist: INTLIT;
 
 procede: procede1 varde? compostate;
-procede1: PROCEDURE SP+ ID SP* paralist SP* SEMI;
+procede1: PROCEDURE ID paralist SEMI;
 
-//int_expr : INTLIT (ADD|SUBNE|DIVSI|MUL) INTLIT {INTLIT };
-//real_expr : REALLIT (ADD|SUBNE|DIVSI|MUL) REALLIT
-//					| REALLIT (ADD|SUBNE|DIVSI|MUL) INTLIT
-//					| INTLIT (ADD|SUBNE|DIVSI|MUL) REALLIT {REALLIT};
+
+expression: indexexpre | invoexpre | exp1;
+
+indexexpre: ID (LB expression? RB)? LQ expindex RQ;
+
+expindex: expi+;
+expi: expi (ADD|SUBNE) expi1
+			| expi1;
+expi1: expi1 (DIVSI|MUL|MOD|DIV) expi2
+			| expi2;
+expi2: SUBNE expi2
+			| expi3;
+expi3: expi4 LQ expi4 RQ
+			| expi4;
+expi4: LB expi RB | ID | INTLIT | indexexpre;
+
+invoexpre: ID LB exprlist* RB;
+exprlist: expression (SEMI expression)*;
+
+////////      statement       ////////////////
+
+manystatements: statement+;
+statement: semistatement;// | nomistatement;
+semistatement: assignstate;// | breakstate | contstate | returnsate | callstate;
+nomistatement: ifstate; //| forstate | whilestate | compostate | withstate;
+
+assignstate: (ID | indexexpre) ASSI assignstate
+             | rhs;
+rhs: (ID | indexexpre) ASSI expression SEMI;
+
+ifstate: IF exp2 THEN statement (ELSE statement)? ;
+
+whilestate: WHILE exp2 DO statement;
+
+forstate: FOR ID ASSI expression (TO|DOWNTO) expression DO statement;
+
+
 
 UNCLOSE_STRING: '"' ('\\' ([tbfrn] | '\'' | '"' | '\\' )
     | ~('\b' | '\f' | '\r' | '\n' | '\t' | '\'' | '"' | '\\'))*
@@ -183,6 +215,7 @@ UNCLOSE_STRING: '"' ('\\' ([tbfrn] | '\'' | '"' | '\\' )
     ;
 ILLEGAL_ESCAPE: '"' (~[\\"'\n\t\r\f] | '\\' [ntfrb\\'"])* '\\' ~[ntrbf'"\\]
                     {raise IllegalEscape(self.text[1:])} ;
+ERROR_CHAR: . {raise ErrorToken(self.text)};// {raise Erroroken(self.text)} .;
 
 /*'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*
 								{
@@ -194,4 +227,3 @@ ILLEGAL_ESCAPE: '"' (~[\\"'\n\t\r\f] | '\\' [ntfrb\\'"])* '\\' ~[ntrbf'"\\]
 ILLEGAL_ESCAPE2: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
 							(~'"')*
 							{raise IllegalEscape(self.text[1:len(self.text)])};*/
-ERROR_CHAR: . {raise ErrorToken(self.text)};// {raise Erroroken(self.text)} .;
