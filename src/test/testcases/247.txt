@@ -1,0 +1,10 @@
+
+            procedure compoundIf(a,b: integer);
+            begin
+                if (a < 0) then
+                begin
+                    a := -a;
+                    b := 100;
+                end
+            end
+        

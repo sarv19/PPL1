@@ -1,0 +1,23 @@
+
+            {* Sorting program: Selection sort *}
+            { Sort an array of 50000 of integer in ascending order then return the array }
+            function SelectionSort(arr: array [1 .. 50000] of integer): array [1 .. 50000] of integer;
+            var i, j, minIndex, tmp: integer;
+            begin
+                for i := 1 to 49999 do
+                begin
+                    minIndex := i;
+                    for j := i + 1 to 50000 do
+                        if (arr[j] < arr[minIndex]) then minIndex := j;
+                    if (minIndex <> i) then
+                    begin
+                        // Swap the value
+                        tmp := arr[i];
+                        arr[i] := arr[minIndex];
+                        arr[minIndex] := tmp;
+                    end
+                end
+
+                return arr;
+            end
+        

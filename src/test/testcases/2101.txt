@@ -1,4 +1,0 @@
-FUNCTION foo(a,b:integer;c:real):real;
-        Begin
-         1234
-          End

@@ -1,0 +1,6 @@
+
+            procedure wrongCont();
+            begin
+                continu;
+            end
+        

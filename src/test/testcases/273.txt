@@ -1,0 +1,6 @@
+
+            function tan(x: real): real;
+            begin
+                return sin(x)/cos(x);
+            end
+        

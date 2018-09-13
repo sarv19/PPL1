@@ -1,0 +1,7 @@
+
+            procedure main();
+            var val: integer;
+            begin
+                val := 100 / 2 + 5 * 10 mod 3;
+            end
+        

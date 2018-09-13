@@ -1,0 +1,1 @@
+procedure sin(x: real): real; begin end

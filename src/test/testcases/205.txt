@@ -1,1 +1,1 @@
-1.2e-4
+var arr: array [1 .. 10] of string;

@@ -1,1 +1,1 @@
-0e12.5e16
+var ieee: real; red, blue, green: integer;

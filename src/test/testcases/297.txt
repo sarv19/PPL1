@@ -1,0 +1,20 @@
+
+            {* Math library - return sine value given radian *}
+            { The program use Taylor MacLaurin approximation }
+            function sine(x: real): real;
+            var result, element, EPSILON: real; i: integer;
+            begin
+                EPSILON := 1e-6;
+                result := 0; element := x;
+                i := 1;
+
+                while (abs(element) > EPSILON) do
+                begin
+                    result := result + element;
+                    element := element * (-x*x/((i + 1)*(i + 2)));
+                    i := i + 2;
+                end
+
+                return result;
+            end
+        

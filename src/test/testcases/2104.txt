@@ -1,3 +1,0 @@
-FUNCTION foo(a,b:integer;c:real):real;
-        Begin
-          End

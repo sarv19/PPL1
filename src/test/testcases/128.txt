@@ -1,1 +1,0 @@
-"A string with \'this quote\' and \"that quote\""

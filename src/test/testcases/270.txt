@@ -1,0 +1,10 @@
+
+            function shortCircuitAnd(a,b,c: boolean): boolean;
+            begin
+                return a and then b and then c;
+            end
+            function shortCircuitOr(a,b,c: boolean): boolean;
+            begin
+                return a or else b or else c;
+            end
+        

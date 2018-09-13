@@ -1,0 +1,26 @@
+
+            {* Sorting program: Bubble sort *}
+            { Sort an integer array of 10000 in ascending order then return the array }
+            function BubbleSort(arr: array [1 .. 10000] of integer): array [1 .. 10000] of integer;
+            var i, j, tmp: integer; swapped: boolean;
+            begin
+                swapped := true;
+                while (swapped) do
+                begin
+                    swapped := false;
+                    for i := 1 to 9999 do
+                    begin
+                        for j := i to 999 do
+                            if (arr[j] > arr[j + 1]) then
+                            begin
+                                tmp := arr[j];
+                                arr[j] := arr[j + 1];
+                                arr[j + 1] := tmp;
+                                swapped := true;
+                            end
+                    end
+                end
+
+                return arr;
+            end
+        

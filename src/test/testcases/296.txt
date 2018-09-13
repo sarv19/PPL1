@@ -1,0 +1,8 @@
+
+            {* Math library - Return absolute value *}
+            function abs(x: real): real;
+            begin
+                if (x < 0) then return -x;
+                else return x;
+            end
+        

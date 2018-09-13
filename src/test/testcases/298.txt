@@ -1,0 +1,21 @@
+
+            {* Math library - return cosine value given radian *}
+            { The program use Taylor MacLaurin approximation }
+            function cosine(x: real): real;
+            var result, element, EPSILON: real; i: integer;
+            begin
+                EPSILON := 1e-6;
+                result := 0; element := 1;
+                i := 1;
+
+                while (abs(element) > EPSILON) do
+                begin
+                    result := result + element;
+                    element := element*(-x*x/(i*(i + 1)));
+
+                    i := i + 2;
+                end
+
+                return result;
+            end
+        

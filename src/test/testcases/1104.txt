@@ -1,2 +1,0 @@
-VAR a: array[1 .. 5] of strIng;
-                       d,g,i:integer;

@@ -1,5 +1,6 @@
 grammar MP;
 
+//1652458
 @lexer::header {
 from lexererr import *
 }  //commnent out this
@@ -11,12 +12,6 @@ options{
 program: manydeclares+ EOF;
 manydeclares: varde | funcde | procede;
 
-//          recognizer                   ///
-/*program  : mptype 'main' LB RB LP body? RP EOF ;
-mptype: INTTYPE  VOIDTYPE ;
-body: funcall SEMI;
-exp: funcall  INTLIT ;
-funcall: ID LB exp? RB ;*/
 
 ////         small tokens        ////////
 
@@ -40,11 +35,10 @@ SUBNE: '-';
 DIVSI: '/';
 GRETN: '>';
 GREEQ: '>=';
-
 ASSI: ':=';
 //DDD: SP DD SP;
 
-
+BOOLLIT: TRUE|FALSE;
 /////////  keywords         /////
 BREAK: B R E A K;
 CONTINUE: C O N T I N U E;
@@ -67,18 +61,20 @@ FALSE: F A L S E;
 ARRAY: A R R A Y;
 OF: O F;
 REAL: R E A L;
-BOOLEAN: B O O L E A N | B O O L;
-INTEGER: I N T E G E R | I N T;
+BOOLEAN: B O O L E A N;
+INTEGER: I N T E G E R;
 STRING: S T R I N G;
 NOT: N O T;
 AND: A N D;
 OR: O R;
 DIV: D I V;
 MOD: M O D;
-MAIN: M A I N;
+WITH: W I T H;
 /*KEYWORD: BREAK|CONTINUE|FOR|TO|DOWNTO|DO|IF|THEN|ELSE|RETURN|WHILE|BEGIN|END
 |FUNCTION|PROCEDURE|VAR|TRUE|FALSE|ARRAY|OF|REAL|BOOLEAN|INTEGER|STRING
 |NOT|AND|OR|DIV|MOD;*/
+
+
 ///////    fragments         ////
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -117,15 +113,16 @@ ID: ('_'|[a-z]|[A-Z])([a-z]|[A-Z]|[0-9]|'_')*;
 INTLIT: [0-9]+;
 REALLIT: ([0-9]+ ('.')? [0-9]*([0-9]*[eE]'-'?[0-9]+)?)
 				| ([0-9]* ('.')? [0-9]+([eE]'-'?[0-9]+)?);
-BOOLLIT: 'true'|'false';
-STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'{self.text = self.text[1:len(self.text) - 1]};
-//fragment QUOTE: '"' -> skip;
-//STRINGLIT:  QUOTE ('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])* QUOTE;
-TYPE:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
-primtype: BOOLEAN | INTEGER | REAL | STRING;
-////////   array         //////////
-arrtype: ARRAY LQ INTLIT DD INTLIT RQ OF primtype;
 
+STRINGLIT: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*'"'{self.text = self.text[1:len(self.text) - 1]};
+
+typee:  BOOLEAN | INTEGER | REAL | STRING | ARRAY;
+primtype: BOOLEAN | INTEGER | REAL | STRING;
+
+
+////////   array         //////////
+arrtype: ARRAY LQ expression DD expression RQ OF primtype;
+//numbers: numforarray;
 
 ////////   commnent      //////////
 CMT: (BLKCMT | LINECMT) ->skip;
@@ -140,7 +137,8 @@ exp1: exp1 (AND THEN) exp2 | exp1 (OR ELSE) exp2
       | exp2;
 exp2: exp3 EQ exp3 | exp3 NOTEQ exp3 |
        exp3 LESSTN exp3 | exp3 GRETN exp3 |
-       exp3 GREEQ exp3 | exp3;
+       exp3 GREEQ exp3 | exp3 LESSEQ exp3
+			 | exp3;
 exp3: exp3 ADD exp4 | exp3 SUBNE exp4
        | exp3 OR exp4 | exp4;
 exp4: exp4 DIVSI exp5 | exp4 MUL exp5
@@ -149,11 +147,14 @@ exp4: exp4 DIVSI exp5 | exp4 MUL exp5
 exp5: NOT exp5| SUBNE exp5
        | exp6;
 exp6:  LB exp1 RB
-       | ID
+       | ID (paralist)? ( LQ indexexpre RQ )?
        | INTLIT
        | BOOLLIT
        | REALLIT
-       | STRINGLIT;
+       | STRINGLIT
+       | indexexpre
+       | invoexpre
+			 ;
 
 
 ////////   declaration       ////////
@@ -165,16 +166,18 @@ funcde: funcde1 varde? compostate;
 funcde1: FUNCTION ID paralist COL vartype SEMI;
 paralist: LB parade? RB;
 parade: idlist COL vartype (SEMI idlist COL vartype )*;   // WRONG
-compostate: BEGIN statelist? END;
-statelist: INTLIT;
+//parade :(idlist COL vartype) | ((idlist COL vartype SEMI )+ idlist COL vartype);
+compostate: BEGIN statement* END;
 
-procede: procede1 varde? compostate;
+procede: procede1 varde* compostate;
 procede1: PROCEDURE ID paralist SEMI;
 
 
 expression: indexexpre | invoexpre | exp1;
 
-indexexpre: ID (LB expression? RB)? LQ expindex RQ;
+indexexpre: ID (LB expression2? RB)? LQ expindex RQ;  // foo(2)[3+x] := a[b[2]] +3;
+expression2: expression (CM expression)*;
+
 
 expindex: expi+;
 expi: expi (ADD|SUBNE) expi1
@@ -185,28 +188,58 @@ expi2: SUBNE expi2
 			| expi3;
 expi3: expi4 LQ expi4 RQ
 			| expi4;
-expi4: LB expi RB | ID | INTLIT | indexexpre;
+expi4: LB expi RB | ID | INTLIT | indexexpre|typee;
+
+/*numforarray: indexexpre1+;
+indexexpre1: indexexpre1 (ADD|SUBNE) expin1
+			| expin1;
+expin1: expin1 (DIVSI|MUL|MOD|DIV) expin2
+			| expin2;
+expin2: SUBNE expin2
+			| expin3;
+expin3: expin4 LQ expin4 RQ
+			| expin4;
+expin4: LB indexexpre1 RB | ID | INTLIT | indexexpre | indexexpre1;*/
+
 
 invoexpre: ID LB exprlist* RB;
-exprlist: expression (SEMI expression)*;
+exprlist: expression (CM expression)*;
 
 ////////      statement       ////////////////
 
 manystatements: statement+;
-statement: semistatement;// | nomistatement;
-semistatement: assignstate;// | breakstate | contstate | returnsate | callstate;
-nomistatement: ifstate; //| forstate | whilestate | compostate | withstate;
+statement: semistatement | nomistatement;
+semistatement: assignstate | breakstate | contstate | returnsate | callstate;
+nomistatement: ifstate | forstate | whilestate | compostate | withstate;
 
-assignstate: (ID | indexexpre) ASSI assignstate
-             | rhs;
-rhs: (ID | indexexpre) ASSI expression SEMI;
+//assignstate: (ID | indexexpre) ASSI (assignstate
+//             | rhs);
+//rhs: ID | indexexpre ASSI expression SEMI;
+assignstate: (lhs ASSI)+ expression SEMI;
+lhs: ID | indexexpre;
 
-ifstate: IF exp2 THEN statement (ELSE statement)? ;
 
-whilestate: WHILE exp2 DO statement;
+ifstate: IF exp1 THEN statement (ELSE statement)? ;
 
-forstate: FOR ID ASSI expression (TO|DOWNTO) expression DO statement;
+whilestate: WHILE exp1 DO stopstate* statement stopstate*;
 
+forstate: FOR ID ASSI expression (TO|DOWNTO) expression DO stopstate* statement stopstate*;
+
+breakstate: BREAK SEMI;
+
+contstate: CONTINUE SEMI;
+
+stopstate: breakstate | contstate;
+
+returnsate: returnexp | returnnoexp;
+returnexp: RETURN expression SEMI;
+returnnoexp: RETURN SEMI;
+
+parade2: parade SEMI;
+withstate: WITH parade2 DO statement;
+
+callstate: ID LB statelist? RB SEMI;
+statelist: expression (CM expression)*;
 
 
 UNCLOSE_STRING: '"' ('\\' ([tbfrn] | '\'' | '"' | '\\' )

@@ -1,0 +1,6 @@
+
+            procedure composition(x: real); var i, j: integer; vector: array [1 .. 3] of real;
+            begin
+                i := j := vector[2] := foo()[1] := x;
+            end
+        

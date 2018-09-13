@@ -1,1 +1,3 @@
-false
+
+          function function_():integer;begin end begin end
+        

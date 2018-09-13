@@ -1,0 +1,6 @@
+
+            function nonAssocRelation(a,b,c: integer): boolean;
+            begin
+                return a > b > c;
+            end
+        

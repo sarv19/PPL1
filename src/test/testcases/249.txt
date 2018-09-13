@@ -1,0 +1,8 @@
+
+            procedure main();
+            var a,b: real;
+            begin
+                if (a) then if (b) then putStringLn("nested");
+                else putRealLn(a);
+            end
+        

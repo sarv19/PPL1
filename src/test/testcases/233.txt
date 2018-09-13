@@ -1,0 +1,1 @@
+function wrongType(): int; begin end

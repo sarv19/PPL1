@@ -1,1 +1,1 @@
-e-12
+var a: boolean; var b,c: integer;

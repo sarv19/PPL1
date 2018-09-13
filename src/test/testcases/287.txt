@@ -1,0 +1,22 @@
+
+            {* Binary search *}
+            { Given an integer array of size 100, find if there is an existing number in that array}
+            function BinarySearch(list: array [1 .. 100] of integer; number: integer): boolean;
+            var left, right, mid: integer;
+            begin
+                left := 1;
+                right := 100;
+                while (left <= right) do
+                begin
+                    // We assume that div function is a floor function
+                    mid := (left + right) div 2;
+                    if (list[mid] < number) then
+                        left := mid + 1;
+                    else if (list[mid] > number) then
+                        right := mid - 1;
+                    else return true;
+                end
+
+                return false;
+            end
+        

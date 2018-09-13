@@ -1,0 +1,6 @@
+
+            procedure main();
+            begin
+                wth a: real; do
+            end
+        

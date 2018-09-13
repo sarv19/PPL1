@@ -1,0 +1,7 @@
+
+            procedure main(); var i: integer; var flag: boolean;
+            begin
+                i := 100;
+                flag := true;
+            end
+        

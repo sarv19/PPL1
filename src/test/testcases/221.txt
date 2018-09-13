@@ -1,0 +1,1 @@
+procedure main(); var a,b,c: integer; e,f: real; begin end

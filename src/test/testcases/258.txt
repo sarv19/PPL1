@@ -1,0 +1,10 @@
+
+            procedure main();
+            var flag: integer;
+            begin
+                flag := 200;
+                with flag: integer; do
+                    flag := 100;
+                putIntLn(flag);
+            end
+        

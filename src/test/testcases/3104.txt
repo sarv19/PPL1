@@ -1,4 +1,0 @@
-procedure foo(a,b:integer; c:real;d,e,f:boolean;k:int);
-        var x,y: real;
-        Begin
-          End

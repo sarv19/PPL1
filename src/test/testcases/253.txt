@@ -1,0 +1,16 @@
+
+            function fibonacci(n: integer): integer;
+            var prev, val, tmp: integer;
+            begin
+                prev := val := 1;
+                while (true) do
+                begin
+                    tmp := val;
+                    val := val + prev;
+                    prev := tmp;
+                    if (val >= n) then break;
+                end
+
+                return val;
+            end
+        

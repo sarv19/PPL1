@@ -1,1 +1,1 @@
-1e5
+var rl, im: real; x_axis, y_axis: array [1 .. 200] of real;

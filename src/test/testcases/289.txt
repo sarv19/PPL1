@@ -1,0 +1,50 @@
+
+            {* Qadratic Eq. calculator *}
+            { This program takes input of coefficients a,b,c and calculate x }
+            procedure main();
+            var a, b, c, x, x1, x2, delta: real;
+            begin
+                putString("Enter coefficient a: ");
+                a := getFloat();
+                putString("Enter coefficient b: ");
+                b := getFloat();
+                putString("Enter coefficient c: ");
+                c := getFloat();
+
+                if (a = 0) and (b = 0) then
+                begin
+                    if (c = 0) then
+                        putStringLn("The equation has many solution.");
+                    else
+                        putStringLn("The equation has no solution.");
+                end
+                else if (a = 0) then
+                begin
+                    x := -c/b;
+                    putString("The solution x = ");
+                    putFloatLn(x);
+                end
+                else
+                begin
+                    delta := b*b - 4*a*c;
+                    if (delta < 0) then
+                        putStringLn("The equation has no solution.");
+                    else if (delta < 0) then
+                    begin
+                        x := -b/(2*a);
+                        putString("The equation has 1 solution x = ");
+                        putFloatLn(x);
+                    end
+                    else
+                    begin
+                        // Assume we have square root function in MP
+                        x1 := (-b + sqrt(delta))/(2*a);
+                        x2 := (-b - sqrt(delta))/(2*a);
+                        putString("The equation has 2 solutions x1 = ");
+                        putFloat(x1);
+                        putString(" and x2 = ");
+                        putFloatLn(x2);
+                    end
+                end
+            end
+        

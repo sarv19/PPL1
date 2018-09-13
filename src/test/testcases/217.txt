@@ -1,0 +1,1 @@
+procedure sum(vector: array [1 .. 10] of real); begin end

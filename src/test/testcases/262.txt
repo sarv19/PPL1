@@ -1,0 +1,7 @@
+
+            procedure main();
+            var a,b,c,d,e: integer;
+            begin
+                a := b := c := d := e := 5;
+            end
+        

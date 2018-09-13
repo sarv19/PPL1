@@ -1,0 +1,24 @@
+
+            {* Linear Eq. calculator *}
+            { Calculate x given coefficients a,b }
+            procedure LinearEq(a,b: real);
+            var a,b,x: real;
+            begin
+                putString("Enter coefficient a: ");
+                a := getFloat();
+                putString("Enter coefficient b: ");
+                b := getFloat();
+
+                if (a = 0) then
+                begin
+                    if (b = 0) then putStringLn("There are infinite solutions");
+                    else putStringLn("There is no solution.");
+                end
+                else
+                begin
+                    x := -b/a;
+                    putString("The solution is x = ");
+                    putFloatLn(x);
+                end
+            end
+        

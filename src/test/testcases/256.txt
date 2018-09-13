@@ -1,0 +1,16 @@
+
+            procedure wrongKeyword();
+            var i,j,val: integer;
+            begin
+                val := 2;
+                for i := 1 to 3 do
+                begin
+                    j := 0;
+                    whil j < 10 do
+                    begin
+                        val := val*2;
+                        j := j + 1;
+                    end
+                end
+            end
+        

@@ -1,0 +1,6 @@
+
+            procedure missSemi(); var temp: real;
+            begin
+                temp := 0
+            end
+        

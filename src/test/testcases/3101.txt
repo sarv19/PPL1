@@ -1,3 +1,0 @@
-procedure foo(a,b:integer;c:real);
-        Begin
-          End

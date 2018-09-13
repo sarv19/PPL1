@@ -1,0 +1,1 @@
+noKeyword(): string; begin end

@@ -1,0 +1,6 @@
+
+            function quadraticEq(a,b,c,x: real): real;
+            begin
+                return a*x*x + b*x + c;
+            end
+        

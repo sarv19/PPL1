@@ -1,0 +1,6 @@
+
+            procedure wrongAssign(); var j: string;
+            begin
+                j = "a string";
+            end
+        

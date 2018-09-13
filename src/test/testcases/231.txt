@@ -1,0 +1,1 @@
+function 1llega1_name(): boolean; begin end

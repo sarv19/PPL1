@@ -1,0 +1,19 @@
+
+            {* Project Euler problem number 2 *}
+            { Find the sum of even numbers in Fibonacci sequence
+              The maximum Fibonacci number do not exceed 4 million }
+            function sumFibo(): integer;
+            var prev, curr, tmp, sum: integer;
+            begin
+                sum := 0;
+                curr := prev := 1;
+                while (curr < 4000000) do
+                begin
+                    if (curr mod 2 = 0) then sum := sum + curr;
+                    // Advancing the Fibonacci number
+                    tmp := curr;
+                    curr := curr + prev;
+                    prev := tmp;
+                end
+            end
+        

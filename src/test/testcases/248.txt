@@ -1,0 +1,9 @@
+
+            procedure compareGreater(a,b: real);
+            begin
+                if (a > b) then
+                    putStringLn("a is greater than b");
+                else
+                    putStringLn("b is greater or equal to a");
+            end
+        

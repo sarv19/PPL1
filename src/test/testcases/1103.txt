@@ -1,1 +1,0 @@
-VAR a,b,c,E: array[1 .. 55] of boolean;

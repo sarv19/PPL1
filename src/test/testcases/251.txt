@@ -1,0 +1,13 @@
+
+            function max(vector: array [1 .. 10] of integer): integer;
+            var i, max: integer;
+            begin
+                max := vector[1];
+                for i := 2 to 10 do
+                begin
+                    if (vector[i] > max) then max := vector[i];
+                end
+
+                return max;
+            end
+        

@@ -1,0 +1,1 @@
+function wrongParam(i: integer;): real; begin end
