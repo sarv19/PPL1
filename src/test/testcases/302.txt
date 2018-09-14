@@ -1,3 +1,1 @@
-
-          function function_():integer;begin end begin end
-        
+1.2

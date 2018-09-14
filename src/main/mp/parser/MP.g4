@@ -17,8 +17,6 @@ manydeclares: varde | funcde | procede;
 
 LB: '(' ;
 RB: ')' ;
-LP: '{';
-RP: '}';
 LQ: '[';
 RQ: ']';
 SEMI: ';' ;
@@ -147,7 +145,7 @@ exp4: exp4 DIVSI exp5 | exp4 MUL exp5
 exp5: NOT exp5| SUBNE exp5
        | exp6;
 exp6:  LB exp1 RB
-       | ID (paralist)? ( LQ indexexpre RQ )?
+       | ID //(paralist)? ( LQ indexexpre RQ )?
        | INTLIT
        | BOOLLIT
        | REALLIT
@@ -158,7 +156,7 @@ exp6:  LB exp1 RB
 
 
 ////////   declaration       ////////
-varde: VAR (idlist COL vartype SEMI)+;
+varde: VAR (idlist COL vartype SEMI)+;   //WRONG
 vartype: primtype | arrtype;
 idlist: ID (CM ID)*;
 
@@ -166,16 +164,20 @@ funcde: funcde1 varde? compostate;
 funcde1: FUNCTION ID paralist COL vartype SEMI;
 paralist: LB parade? RB;
 parade: idlist COL vartype (SEMI idlist COL vartype )*;   // WRONG
-//parade :(idlist COL vartype) | ((idlist COL vartype SEMI )+ idlist COL vartype);
+
+//parade: parade2|parade1;
+//parade1: idlist COL vartype ;
+//parade2: (idlist COL vartype SEMI)+ idlist COL vartype;
 compostate: BEGIN statement* END;
 
-procede: procede1 varde* compostate;
+procede: procede1 varde? compostate;
 procede1: PROCEDURE ID paralist SEMI;
 
 
 expression: indexexpre | invoexpre | exp1;
 
-indexexpre: ID (LB expression2? RB)? LQ expindex RQ;  // foo(2)[3+x] := a[b[2]] +3;
+indexexpre: ID (LB expression? RB)? (LQ expression RQ)+
+            | LB expression2? RB LQ expression2 RQ;  // foo(2)[3+x] := a[b[2]] +3;
 expression2: expression (CM expression)*;
 
 
@@ -202,7 +204,7 @@ expin3: expin4 LQ expin4 RQ
 expin4: LB indexexpre1 RB | ID | INTLIT | indexexpre | indexexpre1;*/
 
 
-invoexpre: ID LB exprlist* RB;
+invoexpre: ID LB exprlist? RB;
 exprlist: expression (CM expression)*;
 
 ////////      statement       ////////////////

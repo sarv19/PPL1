@@ -1,1 +1,1 @@
-var a, c, d: integer;
+5
