@@ -1,0 +1,7 @@
+
+        proCeDURE foo(a:integer);
+        BEGIn
+        foo(x);
+        fooo(y,z);
+        end
+        

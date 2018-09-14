@@ -1,19 +1,6 @@
 
-            {* Math library - return natural logarithm value given value x *}
-            { The program use Taylor MacLaurin approximation }
-            function ln(x: real): real;
-            var result, element, EPSILON: real; i: integer;
-            begin
-                EPSILON := 1e-6;
-                result := 0; element := x;
-                i := 1;
-
-                while (abs(element) > EPSILON) do
-                begin
-                    result := result + element;
-                    element := element*(-x*i/(i + 1));
-                end
-
-                return result;
-            end
-        
+procedure foo();
+begin
+    if a = 1:
+        print('OK');
+end

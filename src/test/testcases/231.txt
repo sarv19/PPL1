@@ -1,1 +1,12 @@
-function 1llega1_name(): boolean; begin end
+
+procedure foo();
+var a: real;
+begin
+    if a = 1 then
+        if b > 3 then
+            c := 5;
+        else
+            d := 1;
+    else
+        e := 0;
+end

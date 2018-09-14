@@ -1,6 +1,4 @@
 
-            function quadraticEq(a,b,c,x: real): real;
-            begin
-                return a*x*x + b*x + c;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[.. 5] of boolean ;

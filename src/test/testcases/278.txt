@@ -1,6 +1,2 @@
 
-            procedure wrongCont();
-            begin
-                continu;
-            end
-        
+procedure foo()

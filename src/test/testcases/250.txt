@@ -1,12 +1,2 @@
 
-            procedure quadraticDelta(delta: real);
-            begin
-                if (delta > 0)
-                    putStringLn("2 solutions");
-                else
-                begin
-                    if (delta < 0) putStringLn("No solution");
-                    else putStringLn("1 solution");
-                end
-            end
-        
+var a integer;

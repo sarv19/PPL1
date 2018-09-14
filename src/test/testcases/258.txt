@@ -1,10 +1,4 @@
 
-            procedure main();
-            var flag: integer;
-            begin
-                flag := 200;
-                with flag: integer; do
-                    flag := 100;
-                putIntLn(flag);
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 .. 5 of boolean ;

@@ -1,6 +1,4 @@
 
-            procedure main();
-            begin
-                wth a: real; do
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 ..] of boolean ;

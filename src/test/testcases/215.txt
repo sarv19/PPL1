@@ -1,1 +1,9 @@
-var polygon;
+
+procedure foo();
+
+var
+    a: real;
+
+begin
+    foo(2)[3+x] := a[b[f+y[2]-h[t[5+j]] * 4]] + 3;
+end

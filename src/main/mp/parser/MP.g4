@@ -3,7 +3,7 @@ grammar MP;
 //1652458
 @lexer::header {
 from lexererr import *
-}  //commnent out this
+}  
 
 options{
 	language=Python3; //=Java
@@ -119,7 +119,7 @@ primtype: BOOLEAN | INTEGER | REAL | STRING;
 
 
 ////////   array         //////////
-arrtype: ARRAY LQ expression DD expression RQ OF primtype;
+arrtype: ARRAY LQ SUBNE? INTLIT DD SUBNE? INTLIT RQ OF primtype;
 //numbers: numforarray;
 
 ////////   commnent      //////////
@@ -144,17 +144,11 @@ exp4: exp4 DIVSI exp5 | exp4 MUL exp5
 			 | exp4 DIV exp5 | exp5;
 exp5: NOT exp5| SUBNE exp5
        | exp6;
-exp6:  LB exp1 RB
-       | ID //(paralist)? ( LQ indexexpre RQ )?
-       | INTLIT
-       | BOOLLIT
-       | REALLIT
-       | STRINGLIT
-       | indexexpre
-       | invoexpre
+exp6:  factor | indexexpre
 			 ;
 
-
+factor: LB exp1 RB | ID | INTLIT | BOOLLIT
+       | REALLIT | STRINGLIT | invoexpre;
 ////////   declaration       ////////
 varde: VAR (idlist COL vartype SEMI)+;   //WRONG
 vartype: primtype | arrtype;
@@ -170,15 +164,13 @@ parade: idlist COL vartype (SEMI idlist COL vartype )*;   // WRONG
 //parade2: (idlist COL vartype SEMI)+ idlist COL vartype;
 compostate: BEGIN statement* END;
 
-procede: procede1 varde? compostate;
+procede: procede1 varde* compostate;
 procede1: PROCEDURE ID paralist SEMI;
 
 
 expression: indexexpre | invoexpre | exp1;
 
-indexexpre: ID (LB expression? RB)? (LQ expression RQ)+
-            | LB expression2? RB LQ expression2 RQ;  // foo(2)[3+x] := a[b[2]] +3;
-expression2: expression (CM expression)*;
+indexexpre: factor (LQ expression RQ)+;
 
 
 expindex: expi+;
@@ -192,16 +184,6 @@ expi3: expi4 LQ expi4 RQ
 			| expi4;
 expi4: LB expi RB | ID | INTLIT | indexexpre|typee;
 
-/*numforarray: indexexpre1+;
-indexexpre1: indexexpre1 (ADD|SUBNE) expin1
-			| expin1;
-expin1: expin1 (DIVSI|MUL|MOD|DIV) expin2
-			| expin2;
-expin2: SUBNE expin2
-			| expin3;
-expin3: expin4 LQ expin4 RQ
-			| expin4;
-expin4: LB indexexpre1 RB | ID | INTLIT | indexexpre | indexexpre1;*/
 
 
 invoexpre: ID LB exprlist? RB;
@@ -214,13 +196,10 @@ statement: semistatement | nomistatement;
 semistatement: assignstate | breakstate | contstate | returnsate | callstate;
 nomistatement: ifstate | forstate | whilestate | compostate | withstate;
 
-//assignstate: (ID | indexexpre) ASSI (assignstate
-//             | rhs);
-//rhs: ID | indexexpre ASSI expression SEMI;
-assignstate: (lhs ASSI)+ expression SEMI;
+assignstate: assignstate1 SEMI;
+assignstate1: lhs ASSI assignstate1
+            |lhs ASSI expression;
 lhs: ID | indexexpre;
-
-
 ifstate: IF exp1 THEN statement (ELSE statement)? ;
 
 whilestate: WHILE exp1 DO stopstate* statement stopstate*;
@@ -250,15 +229,4 @@ UNCLOSE_STRING: '"' ('\\' ([tbfrn] | '\'' | '"' | '\\' )
     ;
 ILLEGAL_ESCAPE: '"' (~[\\"'\n\t\r\f] | '\\' [ntfrb\\'"])* '\\' ~[ntrbf'"\\]
                     {raise IllegalEscape(self.text[1:])} ;
-ERROR_CHAR: . {raise ErrorToken(self.text)};// {raise Erroroken(self.text)} .;
-
-/*'"'(('\\'[bfrnt'"\\])|~[\n\f\r\t'"\\])*
-								{
-									raise UncloseString(self.text[1:len(self.text)])}
-								;*/
-/*ILLEGAL_ESCAPE1: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
-							.*?'"'
-							{raise IllegalEscape(self.text[1:len(self.text) - 1])};
-ILLEGAL_ESCAPE2: '"'('\\'[bfrnt'"\\]|~[\b\n\f\r\t'"\\])*[\n\f\r\t'"\\]+
-							(~'"')*
-							{raise IllegalEscape(self.text[1:len(self.text)])};*/
+ERROR_CHAR: . {raise ErrorToken(self.text)};

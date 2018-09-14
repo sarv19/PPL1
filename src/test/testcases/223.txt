@@ -1,1 +1,9 @@
-procedure printFilter(filter_str: string);
+
+procedure foo();
+
+var
+    a: real;
+
+begin
+    a := TRUE and then 2 ;
+end

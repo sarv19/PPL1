@@ -1,0 +1,8 @@
+
+        procedure ex(x: boolean);
+		      begin
+                if a>b then x:= a or b or c and d;
+                else h:= a mod c div c;
+                return x;
+		      end
+        

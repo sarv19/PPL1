@@ -1,7 +1,6 @@
 
-            procedure main(); var i: integer; var flag: boolean;
-            begin
-                i := 100;
-                flag := true;
-            end
-        
+procedure foo();
+var a: real;
+begin
+    with a: integer; do a := a + 1;
+end

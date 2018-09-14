@@ -1,0 +1,16 @@
+
+        procedure ex(x: string);
+        begin
+		      begin
+                while (i<100) do
+                    begin
+	                   j:=2;
+	                      while ( j<= (i div j)) do
+	                         begin
+		                           if (i mod j <> 0 ) then break;
+		                           j:= j+1;
+	                         end
+                    end
+		      end
+        end
+        

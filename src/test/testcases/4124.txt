@@ -1,0 +1,6 @@
+
+        procedure ex(x: string);
+        begin
+		      while a= true do a:=foo();
+        end
+        

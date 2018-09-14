@@ -1,1 +1,9 @@
-0e12.5e16
+
+procedure foo();
+
+var
+    a: real;
+
+begin
+    a := 5;
+end

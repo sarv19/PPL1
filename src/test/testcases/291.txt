@@ -1,14 +1,6 @@
 
-            {* Factorial generator *}
-            { Generate factorial of N }
-            function TailCallFac(accumulator, n: integer): integer;
-            begin
-                if (n < 2) then return acc;
-
-                return TailCallFac(n*accumulator, n - 1);
-            end
-            function Factorial(N: integer): integer;
-            begin
-                return TailCallFac(1, N);
-            end
-        
+procedure foo();
+var a: integer;
+begin
+begin
+end

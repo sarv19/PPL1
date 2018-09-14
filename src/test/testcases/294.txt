@@ -1,7 +1,4 @@
 
-            {* Simple hello world program *}
-            procedure main();
-            begin
-                putStringLn("Hello, World!");
-            end
-        
+procedure foo(a: real; b, c, d: boolean;);
+begin
+end

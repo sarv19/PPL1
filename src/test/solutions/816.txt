@@ -1,1 +1,0 @@
-ARRAY,array,ArrAY,aRRaY,<EOF>

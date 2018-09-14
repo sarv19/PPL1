@@ -1,6 +1,4 @@
 
-            function tan(x: real): real;
-            begin
-                return sin(x)/cos(x);
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array [0 .. 5] of true ;

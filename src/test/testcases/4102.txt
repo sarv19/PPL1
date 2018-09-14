@@ -1,0 +1,7 @@
+
+        proCeDURE foo(a:integer);
+        var x, y: real;
+        BEGIn
+        foo(2)[3+x] := a[b[2]] +3;
+        end
+        

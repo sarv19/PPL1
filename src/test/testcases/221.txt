@@ -1,1 +1,9 @@
-procedure main(); var a,b,c: integer; e,f: real; begin end
+
+procedure foo();
+
+var
+    a: real;
+
+begin
+    a := b = c ;
+end

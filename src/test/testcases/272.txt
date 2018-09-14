@@ -1,6 +1,4 @@
 
-            procedure multiDimArray();
-            var i: array [1 .. 2 ,3 .. 4] of integer;
-            begin
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: arr[0 .. 5] of boolean ;

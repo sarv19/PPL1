@@ -1,0 +1,7 @@
+
+        FUNcTION foo(a:integer;c,d,f: boolean): integer;
+        var y, u: real;
+        BEGIn
+        foo(2)[3+x] := a[b[2]] +3;
+        end
+        

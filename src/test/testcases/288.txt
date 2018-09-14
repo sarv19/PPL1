@@ -1,16 +1,5 @@
 
-            {* Psuedo-random number generator *}
-            { This implementation is a conversion from C' PRNG
-              that generates 32-bit numbers }
-
-            var seed: integer;
-
-            procedure srand(x: integer);
-            begin
-                seed := x;
-            end
-            function rand(): integer;
-            begin
-                seed := (seed * 1103515245 + 12345) mod RAND_MAX;
-            end
-        
+procedure foo();
+var a;
+begin
+end

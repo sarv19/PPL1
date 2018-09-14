@@ -1,15 +1,4 @@
 
-            {* Interactive adder *}
-            procedure main();
-            var a,b,x: real;
-            begin
-                putString("Enter first number: ");
-                a := getFloat();
-                putString("Enter second number: ");
-                b := getFloat();
-
-                putString("The sum of 2 numbers: ");
-                x := a + b;
-                putFloatLn(x);
-            end
-        
+function foo();
+begin
+end

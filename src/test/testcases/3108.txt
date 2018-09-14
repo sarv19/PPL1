@@ -1,0 +1,4 @@
+procedure foo(a,b:integer):interger;
+        Begin
+
+        End

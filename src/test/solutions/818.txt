@@ -1,1 +1,0 @@
-REAL,real,REal,reAL,<EOF>

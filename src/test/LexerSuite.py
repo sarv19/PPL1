@@ -2,6 +2,7 @@ import unittest
 from TestUtils import TestLexer
 
 class LexerSuite(unittest.TestCase):
+
 #########     test identifier   ##############
     def test_identifier(self):
         self.assertTrue(TestLexer.test("abc_123","abc_123,<EOF>",101))
@@ -25,6 +26,11 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("____ndandrGHU890ound_","____ndandrGHU890ound_,<EOF>",110))
     def test_identifier11(self):
         self.assertTrue(TestLexer.test("thisIsWeird$%^&","thisIsWeird,Error Token $",110))
+    def test_identifier12(self):
+        self.assertTrue(TestLexer.test("_nhu nhu_123 n_1_2_c_4","_nhu,nhu_123,n_1_2_c_4,<EOF>",112))
+    def test_identifier13(self):
+        self.assertTrue(TestLexer.test("Can I write thIS &*%","Can,I,write,thIS,Error Token &",113))
+
 
 #############    test integer    #############
     def test_int1(self):
@@ -33,6 +39,11 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("5","5,<EOF>",202))
     def test_int3(self):
         self.assertTrue(TestLexer.test("32432yui","32432,yui,<EOF>",203))
+    def test_int4(self):
+        self.assertTrue(TestLexer.test("0xEF57","0,xEF57,<EOF>",204))
+    def test_int5(self):
+        self.assertTrue(TestLexer.test("Long lOng one: 345678900987675434123456789009876543234567890098765432",
+                                        "Long,lOng,one,:,345678900987675434123456789009876543234567890098765432,<EOF>",205))
 
 #############    test real    #############
     def test_real1(self):
@@ -57,15 +68,18 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("143e","143,e,<EOF>",310))
     def test_real11(self):
         self.assertTrue(TestLexer.test("0e12.5e16","0e12,.5e16,<EOF>",311))
-##    def test_real12(self):
-##        self.assertTrue(TestLexer.test(".",".,<EOF>",312))
+    def test_real12(self):
+        self.assertTrue(TestLexer.test(".","Error Token .",312))
     def test_real13(self):
         self.assertTrue(TestLexer.test("-.5","-,.5,<EOF>",313))
     def test_real14(self):
         self.assertTrue(TestLexer.test("1e5","1e5,<EOF>",314))
     def test_real15(self):
         self.assertTrue(TestLexer.test("1.e5","1.e5,<EOF>",315))
-
+    def test_real16(self):
+        self.assertTrue(TestLexer.test("0.","0.,<EOF>",316))
+    def test_real17(self):
+        self.assertTrue(TestLexer.test("1.E5","1.E5,<EOF>",317))
 
 #######      test boolean           #########
     def test_boolean1(self):
@@ -104,6 +118,10 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test('"Test \\n \\t \\f \\b"','Test \\n \\t \\f \\b,<EOF>',513))
     def test_string14(self):
         self.assertTrue(TestLexer.test('"Is This Ok? \\\\\\\\"','Is This Ok? \\\\\\\\,<EOF>',514))
+    def test_string15(self):
+        self.assertTrue(TestLexer.test('?','Error Token ?',515))
+    def test_string16(self):
+        self.assertTrue(TestLexer.test('"fdsfsd\\tcscas','Unclosed String: fdsfsd\\tcscas',516))
 
 #######      test separators&operator     ############
     def test_sepa_oper1(self):
@@ -112,6 +130,8 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("NoT oR DiV mOD aND ","NoT,oR,DiV,mOD,aND,<EOF>",602))
     def test_sepa_oper3(self):
         self.assertTrue(TestLexer.test("[]:(); .. ,","[,],:,(,),;,..,,,<EOF>",603))
+    def test_sepa_oper4(self):
+        self.assertTrue(TestLexer.test("[]OR:(MoD);AnD .. ,","[,],OR,:,(,MoD,),;,AnD,..,,,<EOF>",604))
 
 #######      test commnent       ############
     def test_cmt1(self):
@@ -132,6 +152,11 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("(*fsdfjs//dlfjsldkf","(,*,fsdfjs,<EOF>",708))
     def test_cmt9(self):
         self.assertTrue(TestLexer.test("//fsdfjsd(*lfjsldkf","<EOF>",709))
+    def test_cmt10(self):
+        self.assertTrue(TestLexer.test("{fsdfjsdl\nfjsldkf}","<EOF>",710))
+    def test_cmt11(self):
+        self.assertTrue(TestLexer.test("(*fsd\tfjs//d'lfjs'ldkf*)","<EOF>",711))
+
 
 ##########    test keywords        ############
     def test_kw1(self):
@@ -172,3 +197,35 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("REAL real REal reAL","REAL,real,REal,reAL,<EOF>",818))
     def test_kw19(self):
         self.assertTrue(TestLexer.test("INTEGER integer INteger inTEGEr","INTEGER,integer,INteger,inTEGEr,<EOF>",819))
+    def test_kw20(self):
+        self.assertTrue(TestLexer.test("INTEGER iinteger INtegeri inTEGEr","INTEGER,iinteger,INtegeri,inTEGEr,<EOF>",820))
+    def test_kw21(self):
+        self.assertTrue(TestLexer.test("WITH iwith withi with","WITH,iwith,withi,with,<EOF>",821))
+
+#########   test mixstyle    ############
+    def test_mixstyle1(self):
+        self.assertTrue(TestLexer.test('"\n \t \f \b this"','Unclosed String: ',901))
+    def test_mixstyle2(self):
+        self.assertTrue(TestLexer.test("a<====><=====b","a,<=,=,=,=,>,<=,=,=,=,=,b,<EOF>",902))
+    def test_mixstyle3(self):
+        self.assertTrue(TestLexer.test("dsf:,.()^jdks","dsf,:,,,Error Token .",903))
+    def test_mixstyle4(self):
+        self.assertTrue(TestLexer.test("procedure foo(); begin a := b[3] := foo(3)[5] := 5;end",
+                                         "procedure,foo,(,),;,begin,a,:=,b,[,3,],:=,foo,(,3,),[,5,],:=,5,;,end,<EOF>",904))
+    def test_mixstyle5(self):
+        self.assertTrue(TestLexer.test("VAR a,b,c: integer, d:REal ","VAR,a,,,b,,,c,:,integer,,,d,:,REal,<EOF>",905))
+    def test_mixstyle6(self):
+        self.assertTrue(TestLexer.test("FUNCTION foo (a,b: integer; c: real): array [1 .. 2] of real;;            BEGIn      END",
+                                        "FUNCTION,foo,(,a,,,b,:,integer,;,c,:,real,),:,array,[,1,..,2,],of,real,;,;,BEGIn,END,<EOF>",906))
+    def test_mixstyle7(self):
+        self.assertTrue(TestLexer.test("procedure main(); begin a := b[2]  := foo();a := b := c : 1;end",
+                                       "procedure,main,(,),;,begin,a,:=,b,[,2,],:=,foo,(,),;,a,:=,b,:=,c,:,1,;,end,<EOF>",907))
+    def test_mixstyle8(self):
+        self.assertTrue(TestLexer.test("int: 789;float: 5.0E-4,BooleAN: True","int,:,789,;,float,:,5.0E-4,,,BooleAN,:,True,<EOF>",908))
+    def test_mixstyle9(self):
+        self.assertTrue(TestLexer.test("tons of float:1.e7 .7 .E110 5e17 5E-8.8 5E-4.e9","tons,of,float,:,1.e7,.7,Error Token .",909))
+    def test_mixstyle10(self):
+        self.assertTrue(TestLexer.test("var i: integer;function f ():integer;begin return 200;end procedure main ();",
+        "var,i,:,integer,;,function,f,(,),:,integer,;,begin,return,200,;,end,procedure,main,(,),;,<EOF>",910))
+    def test_mixstyle11(self):
+        self.assertTrue(TestLexer.test("with a,b:integer;c:array[1 .. 2]of real;do d=c[a]+b;","with,a,,,b,:,integer,;,c,:,array,[,1,..,2,],of,real,;,do,d,=,c,[,a,],+,b,;,<EOF>",911))

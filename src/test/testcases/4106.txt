@@ -1,0 +1,9 @@
+
+        proCeDURE foo(a:integer);
+        var y: array [-5 .. -6] of real;
+        BEGIn
+        foo(x);
+        fooo(y,z);
+        a :=b[10]:=foo()[3]:=x:=1;
+        end
+        

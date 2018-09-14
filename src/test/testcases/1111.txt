@@ -1,0 +1,1 @@
+var arr : array [5*7/5+4-(b+2) .. x*x mod 4] of integer;

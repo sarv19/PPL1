@@ -1,6 +1,4 @@
 
-            procedure indexExpr();
-            begin
-                foo(2)[3+x] := a[b[2]] + 3;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array(0 .. 5) of boolean ;

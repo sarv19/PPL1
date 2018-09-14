@@ -1,1 +1,4 @@
-.1E2
+
+Var a, B, c: InTeGer;
+    x, Y, Z: Boolean ;
+    g: Array [4 .. 6] of REAL;

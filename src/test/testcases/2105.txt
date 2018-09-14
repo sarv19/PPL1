@@ -1,0 +1,3 @@
+FUNcTION foo(xyz: aRRaY [1 .. 6] of real):integer;
+        Begin
+        End

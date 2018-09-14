@@ -1,0 +1,10 @@
+
+        procedure ex(x: string);
+        begin
+		      begin
+                if a mod b then g:=h:=foo();
+                else h:=5;
+                return x;
+		      end
+        end
+        

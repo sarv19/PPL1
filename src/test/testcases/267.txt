@@ -1,6 +1,4 @@
 
-            function nonAssocRelation(a,b,c: integer): boolean;
-            begin
-                return a > b > c;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 .. 5] boolean ;

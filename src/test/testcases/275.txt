@@ -1,6 +1,4 @@
 
-            procedure wrongKeyword();
-            begin
-                retun 1;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0.. 5] of boolean ;

@@ -1,1 +1,6 @@
-128e-42
+
+procedure foo(x: integer);
+var a, b, c: real;
+begin
+
+end

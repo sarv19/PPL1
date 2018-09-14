@@ -1,0 +1,8 @@
+
+        procedure main();
+            begin
+               COnTINue;
+	           for temp := a*b+c downto temp=25
+               do a:=b*c div f;
+            end
+        

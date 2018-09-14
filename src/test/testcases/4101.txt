@@ -1,0 +1,6 @@
+
+        proCeDURE foo(a:integer);
+        BEGIn
+        foo(2)[3+x] := a[b[2]] +3;
+        end
+        

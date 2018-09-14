@@ -1,9 +1,4 @@
 
-            procedure main();
-            begin
-                while true
-                begin
-                    break;
-                end
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 .. 5] of boolean

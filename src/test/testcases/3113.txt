@@ -1,0 +1,8 @@
+procedure integer();
+        var x,y: real;
+        var a,b: string;
+        Begin
+        End
+        (*BEGIn
+        this is totally fine :)
+        end*)

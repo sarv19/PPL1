@@ -1,0 +1,5 @@
+procedure foo(a,b:array [2 .. 4] of real);
+        Begin
+            BEGIN
+            End
+        End

@@ -1,0 +1,9 @@
+
+        procedure ex(x: string);
+        begin
+		      begin
+                if a>b then g:=h:=foo();
+                return x;
+		      end
+        end
+        

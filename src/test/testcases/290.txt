@@ -1,19 +1,4 @@
 
-            {* Fibonacci value generator *}
-            { Generate Fibonacci nth number }
-            function Fibonacci(n: integer): integer;
-            var f, a, b, i: integer;
-            begin
-                if (n < 2) then return 1;
-
-                f := 0; a := b := 1;
-                for i := 2 to n do
-                begin
-                    f := a + b;
-                    a := b;
-                    b := f;
-                end
-
-                return f;
-            end
-        
+procedure foo();
+var a: integer;
+end

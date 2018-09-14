@@ -1,7 +1,4 @@
 
-            procedure main();
-            var a,b,c,d,e: integer;
-            begin
-                a := b := c := d := e := 5;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 ... 5] of boolean ;

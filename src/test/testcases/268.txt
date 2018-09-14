@@ -1,9 +1,4 @@
 
-            function AndOr(andFLag: boolean; a,b: integer): integer;
-            begin
-                if (andFlag= true) then
-                    return a and b;
-                else
-                    return a or b;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 .. 5] ;

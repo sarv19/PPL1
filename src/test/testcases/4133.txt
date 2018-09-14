@@ -1,0 +1,7 @@
+
+        procedure main();
+            begin
+	           while a > 5 do b:=c;
+               COnTINue;
+            end
+        

@@ -1,0 +1,5 @@
+procedure foo();
+        var x,y: real;
+        var a,b: string;
+        Begin
+        End

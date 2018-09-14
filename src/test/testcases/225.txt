@@ -1,1 +1,9 @@
-procedure printCmd(mode: integer; pprint: boolean; cmdList: array [1 .. 10] of string); begin end
+
+procedure foo();
+
+var
+    a: real;
+
+begin
+    a := True ;
+end

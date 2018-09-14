@@ -1,0 +1,4 @@
+procedure multidimension(a : array [1..5,1..5] of real);
+                begin
+                end
+                

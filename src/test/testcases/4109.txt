@@ -1,0 +1,6 @@
+
+        procedure main();
+        begin
+            vec[1] := vec[2] := vector[3] := 0;
+        end
+        

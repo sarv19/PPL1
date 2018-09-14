@@ -1,22 +1,4 @@
 
-            procedure findPrime();
-            var i,j: integer;
-            begin
-                i := 2;
-                while (i < 100) do
-                begin
-                    j := 2;
-                    while (j <= (i div j)) do
-                    begin
-                        if (i mod j <> 0) then break;
-                        j := j + 1;
-                    end
-                    if (j > (i div j)) then
-                    begin
-                        putInt(i);
-                        putStringLn(" is prime");
-                        i := i + 1;
-                    end
-                end
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 .. 5] of bool;

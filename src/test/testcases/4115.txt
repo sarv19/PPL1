@@ -1,0 +1,8 @@
+
+        funcTION weird(aa:real): boolean;
+        var x,t: array[1 .. -6] of real;
+        begin
+            x:=getInt(stdin);
+            y:=x*2;
+        end
+        

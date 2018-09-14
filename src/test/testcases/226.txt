@@ -1,1 +1,6 @@
-function cos(x: real): real; begin end
+
+procedure foo();
+var a: real;
+begin
+    if a = 1 then ok();
+end

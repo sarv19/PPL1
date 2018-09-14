@@ -1,8 +1,4 @@
 
-            procedure invalidOp();
-            var i: real;
-            begin
-                i := 1.5;
-                i += 7.5;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array of boolean

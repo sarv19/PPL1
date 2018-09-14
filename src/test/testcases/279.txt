@@ -1,5 +1,2 @@
 
-            function missBegin(): integer;
-                return 10;
-            end
-        
+procedure foo ;

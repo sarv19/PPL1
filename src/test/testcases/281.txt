@@ -1,15 +1,2 @@
 
-            procedure nestedCompound();
-            begin
-                callThis();
-                begin
-                    begin
-                        begin
-                            callThat();
-                        end
-                        callThese();
-                    end
-                    callThose();
-                end
-            end
-        
+procedure foo() ;

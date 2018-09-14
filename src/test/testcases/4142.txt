@@ -1,0 +1,10 @@
+
+        procedure main();
+            begin
+	           with a,b:integer;c:array[1 .. 2]of real;
+               do d:=c[a]+b;
+               COnTINue; //to where i dont know
+               {oh wait I do know, i should call something ^^}
+               foo(3,a+1,m(2));
+            end
+        

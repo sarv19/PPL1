@@ -1,6 +1,4 @@
 
-            function XorOp(a,b: boolean): boolean;
-            begin
-                return a and not b or not a and b;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[0 .. 5] with boolean ;

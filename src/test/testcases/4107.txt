@@ -1,0 +1,7 @@
+
+        funcTION foo(a:integer): REal;
+        var y: array [-5 .. -6] of real;
+        BEGIn
+        a :=b[10]:=foo()[3]:=x:=1;
+        end
+        

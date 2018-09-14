@@ -1,0 +1,8 @@
+
+        procedure main();
+            begin
+	           var a,b: integer;
+                    c: array [1..100] of integer;
+	           c:[a]= b+100 mod 5;
+            end
+        

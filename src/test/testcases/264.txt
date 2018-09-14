@@ -1,7 +1,4 @@
 
-            procedure main();
-            var val: integer;
-            begin
-                val := 100 / 2 + 5 * 10 mod 3;
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array[] of boolean ;

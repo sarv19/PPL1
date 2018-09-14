@@ -1,1 +1,9 @@
-var b d e f: integer
+
+procedure foo();
+
+var
+    a: real;
+
+begin
+    a := b := c := 5;
+end

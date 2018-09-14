@@ -1,10 +1,2 @@
 
-            procedure count(n: integer); var i: integer;
-            begin
-                for i := n downto 1 do
-                begin
-                    putString("Countdown: ");
-                    putIntLn(i);
-                end
-            end
-        
+var a: integer

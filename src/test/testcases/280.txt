@@ -1,5 +1,2 @@
 
-            function missEnd(): real;
-            begin
-                return 9.6;
-        
+procedure foo( ;

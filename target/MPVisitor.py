@@ -64,6 +64,11 @@ class MPVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by MPParser#factor.
+    def visitFactor(self, ctx:MPParser.FactorContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by MPParser#varde.
     def visitVarde(self, ctx:MPParser.VardeContext):
         return self.visitChildren(ctx)
@@ -121,11 +126,6 @@ class MPVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by MPParser#indexexpre.
     def visitIndexexpre(self, ctx:MPParser.IndexexpreContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by MPParser#expression2.
-    def visitExpression2(self, ctx:MPParser.Expression2Context):
         return self.visitChildren(ctx)
 
 
@@ -191,6 +191,11 @@ class MPVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by MPParser#assignstate.
     def visitAssignstate(self, ctx:MPParser.AssignstateContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by MPParser#assignstate1.
+    def visitAssignstate1(self, ctx:MPParser.Assignstate1Context):
         return self.visitChildren(ctx)
 
 

@@ -1,1 +1,7 @@
-function zeroVector(): array [1 .. 50] of real; begin end
+
+procedure foo();
+var a: real;
+begin
+    if a = 1 then
+        a := 5;
+end

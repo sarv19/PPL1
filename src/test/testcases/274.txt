@@ -1,12 +1,4 @@
 
-            procedure main();
-            var a: integer;
-            begin
-                a := 10;
-                while true do
-                begin
-                    if a = 0 then return;
-                    a := a - 1;
-                end
-            end
-        
+var a, b, c: boolean;
+x, y, z: real ;
+g, h, i: array [0 ..5] of boolean ;

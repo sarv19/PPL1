@@ -1,0 +1,7 @@
+
+        procedure main();
+        var k: boolean;
+        begin
+            vec[1] := vec[2] := vector[3] := foo()[b] := a;
+        end
+        

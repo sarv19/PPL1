@@ -1,9 +1,2 @@
 
-            procedure incrementByN(x,n,count: integer); var i: integer;
-            begin
-                for i := 1 to count do
-                begin
-                    x := x + n;
-                end
-            end
-        
+var a:: integer;
