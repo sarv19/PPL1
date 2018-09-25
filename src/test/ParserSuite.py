@@ -130,6 +130,24 @@ class ParserSuite(unittest.TestCase):
         End"""
         expect = "Error on line 1 col 19: ;"
         self.assertTrue(TestParser.test(input,expect,2113))
+    def test_funcdeclare14(self):
+        input = """function foo(): real;
+                    var a: real;
+                    a:=a+5;
+                    a:=5.5;
+                    return a;
+                    """
+        expect = "Error on line 3 col 21: :="
+        self.assertTrue(TestParser.test(input,expect,2114))
+    def test_funcdeclare15(self):
+        input = """function foo ()[1..5] : integer;
+                    begin
+                    	hello();
+                    end
+                    """
+        expect = "Error on line 1 col 15: ["
+        self.assertTrue(TestParser.test(input,expect,2115))
+
 
 #########  test procedure declaration     #################
     def test_procedeclare1(self):
@@ -248,7 +266,14 @@ class ParserSuite(unittest.TestCase):
                 """
         expect = "Error on line 1 col 36: 1."
         self.assertTrue(TestParser.test(input,expect,3115))
-
+    def test_procedeclare16(self):
+        input = """procedure foo();
+                    begin
+                    	var i: real; //wrong for sure
+                    end
+                """
+        expect = "Error on line 3 col 21: var"
+        self.assertTrue(TestParser.test(input,expect,3116))
 
 ###########       test expression       ############
     def test_expression1(self):
@@ -814,3 +839,181 @@ class ParserSuite(unittest.TestCase):
         """
         expect = "Error on line 16 col 8: <EOF>"
         self.assertTrue(TestParser.test(input,expect,4144))
+    def test_expression45(self):
+        input = """
+        procedure chaof ();
+        begin
+        	hello();
+        	begin
+        		hi();
+        		begin
+        			bye();
+        			begin
+        			end
+        		end
+        	end
+        end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,4145))
+    def test_expression46(self):
+        input = """
+        procedure main();
+            begin
+	           while a > 5 do b:=c
+               break;
+            end
+        """
+        expect = "Error on line 5 col 15: break"
+        self.assertTrue(TestParser.test(input,expect,4146))
+    def test_expression47(self):
+        input = """
+        procedure main();
+            begin
+	           a := b[3] := foo(3) := 5;
+               break;
+            end
+        """
+        expect = "Error on line 4 col 32: :="
+        self.assertTrue(TestParser.test(input,expect,4147))
+    def test_expression48(self):
+        input = """
+        procedure foo();
+            begin
+                if a = 1 then b := 2 else begin
+            end
+        """
+        expect = "Error on line 4 col 37: else"
+        self.assertTrue(TestParser.test(input,expect,4148))
+    def test_expression49(self):
+        input = """
+        procedure fine();
+            begin
+                for i := 1 .. 10 do okay();
+            end
+        """
+        expect = "Error on line 4 col 27: .."
+        self.assertTrue(TestParser.test(input,expect,4149))
+    def test_expression50(self):
+        input = """
+        funtion foo(): string;
+            begin
+            	return ss(hello(sayhi()));
+            end
+        """
+        expect = "Error on line 2 col 8: funtion"
+        self.assertTrue(TestParser.test(input,expect,4150))
+    def test_expression51(self):
+        input = """
+        procedure main();
+            begin
+            	for i := f(g(h[5*t(9,1)])) to 10+5-4*e+x do countthat();
+            end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,4151))
+    def test_expression52(self):
+        input = """
+        procedure main();
+            begin
+            	with stringg: string do countthat();
+            end
+        """
+        expect = "Error on line 4 col 34: do"
+        self.assertTrue(TestParser.test(input,expect,4152))
+    def test_expression53(self):
+        input = """
+        procedure main();
+            begin
+            	for i := f(g(h[5*t(9,1)])) to 10+5-4*e+x do
+                    begin
+                        countthat();
+                    end
+            end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,4153))
+    def test_expression54(self):
+        input = """
+        var seed: integer;
+             procedure srand(x: integer);
+             begin
+                 seed := x;
+             end
+             function rand(): integer;
+             begin
+                 seed := (seed * 1103515245 + 12345) mod RAND_MAX;
+                 x := seed[3] :=srand(3)[5] :=45;
+             end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,4154))
+    def test_expression55(self):
+        input = """
+        procedure main();
+            begin
+	           with a,b:integer;c:array[1 .. 2]of real;
+               do d:=c[a]+b;
+               COnTINue; //to where i dont know
+               {oh wait I do know, i should call something ^^}
+               foo(3,a+1,m(2));
+               (*here we are again
+               stuck in the moment \\without way out*)
+               a:=a[d=4]:=6;
+            end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,4155))
+    def test_expression56(self):
+        input = """
+        procedure ex(x: string);
+        begin
+		      while a= true do a:=foo()[];
+        end
+        """
+        expect = "Error on line 4 col 34: ]"
+        self.assertTrue(TestParser.test(input,expect,4156))
+    def test_expression57(self):
+        input = """
+        procedure main();
+            begin
+            	countthat();
+                a:=a[a:=3]:=5;
+            end
+        """
+        expect = "Error on line 5 col 22: :="
+        self.assertTrue(TestParser.test(input,expect,4157))
+    def test_expression58(self):
+        input = """
+        procedure main();
+            begin
+	           while a > 5 do b:=c;
+               COnTINue
+               break
+            end
+        """
+        expect = "Error on line 6 col 15: break"
+        self.assertTrue(TestParser.test(input,expect,4158))
+    def test_expression59(self):
+        input = """
+        procedure foo();
+           begin
+             a := a[d < y(5 > 3) + 3 mod n(12)] := 5[3] = 3[2] := b;
+           end
+        """
+        expect = "Error on line 4 col 63: :="
+        self.assertTrue(TestParser.test(input,expect,4159))
+    def test_expression60(self):
+        input = """
+        // This is the end, hold your breath and count to ten....
+        procedure main();
+            begin
+	           with a,b:integer;c:array[1 .. 2]of real;
+               do d:=c[a]+b;
+               COnTINue; //to where i dont know
+               break; //or maybe we should take a brEAK
+               if a mod b then g:=h:=foo();
+            end
+        """
+        expect = "successful"
+        self.assertTrue(TestParser.test(input,expect,4160))

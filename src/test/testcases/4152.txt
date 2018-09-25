@@ -1,0 +1,6 @@
+
+        procedure main();
+            begin
+            	with stringg: string do countthat();
+            end
+        

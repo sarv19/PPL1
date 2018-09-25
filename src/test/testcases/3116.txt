@@ -1,0 +1,5 @@
+procedure foo();
+                    begin
+                    	var i: real; //wrong for sure
+                    end
+                

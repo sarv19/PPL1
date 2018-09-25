@@ -1,0 +1,6 @@
+
+        procedure fine();
+            begin
+                for i := 1 .. 10 do okay();
+            end
+        

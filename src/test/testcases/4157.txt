@@ -1,0 +1,7 @@
+
+        procedure main();
+            begin
+            	countthat();
+                a:=a[a:=3]:=5;
+            end
+        

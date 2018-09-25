@@ -1,0 +1,1 @@
+int,:,789,;,float,:,5.0E-4,,,BooleAN,:,True,<EOF>

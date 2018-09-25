@@ -1,0 +1,6 @@
+
+        funtion foo(): string;
+            begin
+            	return ss(hello(sayhi()));
+            end
+        
